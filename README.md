@@ -90,8 +90,8 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 		* Set root  password: `passwd`
 		* Install the most **Basic Packages**:
 		```
-		pacman -S base-devel linux linux-headers networkmanager inetutils git reflector inxi dialog\
-		alsa-utils pulseaudio dosfstools ntfs-3g bluez bluez-utils pulseudio-bluetooth xdg-utils \
+		pacman -S base-devel linux linux-headers networkmanager inetutils git reflector inxi dialog 	\
+		alsa-utils pulseaudio dosfstools ntfs-3g bluez bluez-utils pulseudio-bluetooth xdg-utils	\
 		```
 		
 
