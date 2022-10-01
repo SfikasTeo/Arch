@@ -6,7 +6,7 @@
   </ol>
 </details>
 
-# [Arch](https://wiki.archlinux.org/title/Arch_Linux) [<img src="https://github.com/SfikasTeo/Arch/blob/main/ArchLogo2.png" width="220" align="right" alt="Arch">](https://wiki.archlinux.org/)
+# [Arch](https://wiki.archlinux.org/title/Arch_Linux) [<img src="https://github.com/SfikasTeo/Arch/blob/main/ArchLogo.png" width="220" align="right" alt="Arch">](https://wiki.archlinux.org/)
 Arch Linux is a barebone linux distribution with a **minimal** ISO focused on the KISS principle. Arch strives to provide the latest software
 releases based on a **rolling release** model. Arch does not target a selected use case but a user mentality of "do-it-yourself", although the 
 rolling release model may be prone to **user error** and unstable for server use.  
