@@ -54,9 +54,9 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 	```
 	* Mount the Filesystems:
 	```
-	mount -o ssd,noatime,space_cache=v2,discard=async,compress=zstd:1,subvol=@ /dev/sda2 /mnt
+	mount -o rw,ssd,noatime,space_cache=v2,discard=async,compress=zstd:1,subvol=@ /dev/sda2 /mnt
 	mkdir /mnt/home
-	mount -o ssd,noatime,space_cache=v2,discard=async,compress=zstd:1,subvol=@home /dev/sda2 /mnt/home
+	mount -o rw,ssd,noatime,space_cache=v2,discard=async,compress=zstd:1,subvol=@home /dev/sda2 /mnt/home
 	mkdir /mnt/boot
 	mount /dev/sda1 /mnt/boot
 	```
@@ -66,36 +66,47 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 	* Install reflector: `pacman -Syy && pacman -S reflector` and use `reflector -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist`
 * Install Essential packages using pacstrap:
  ```
- pacstrap /mnt base linux linux-firmware neovim amd-ucode parted man-pages man-db
+ pacstrap -i /mnt base linux linux-firmware neovim parted man-pages man-db {amd-ucode or intel-ucode}
  ```
  * Configure The system:
  	* Generate and edit **fstab**: `genfstab -U /mnt >> /mnt/etc/fstab` && `cat /mnt/etc/fstab`
  	* Change root into the new system: `arch-chroot /mnt`
  		* Create symlink for timezone : `ln -sf /usr/share/zoneinfo/Europe/Athens /etc/localetime`
- 		* Write the current software UTC time to the hardware clock and create `/etc/adjtime` : `hwclock --systohc`
- 		* For [Troubleshooting](https://wiki.archlinux.org/title/System_time#Troubleshooting) manually synchronize your clock with the network: `ntpd -qg`
- 		* Create locale: `locale-gen` and `echo "LANG=en_US.UTF-8" >> /etc/locale.conf`
+ 		* Synchronize hardware and system clock, create `/etc/adjtime` : `hwclock --systohc --utc`
+ 			* [Troubleshooting](https://wiki.archlinux.org/title/System_time#Troubleshooting): `ntpd -qg`
+ 		* Edit `/etc/locale.gen` and **uncomment** `en_US.UTF-8 UTF-8`
+		* Create the [locale](https://wiki.archlinux.org/title/Locale): `locale-gen` and `echo "LANG=en_US.UTF-8" >> /etc/locale.conf`
  		* If keyboard layout was changed edit `/etc/vconsole.conf`
- 		* Edit Hostname: `echo "<SF-Arch>" >> /etc/hostname`
+ 		* Edit Hostname: `echo "SF-Arch" >> /etc/hostname`
  		* Edit LocalHost: `nvim /etc/hosts`
  		```
 		#Standard host addresses
 		127.0.0.1	localhost 
 		::1		localhost ip6-localhost ip6-loopback
-		ff02::1		ip6-allnodes
-		ffo2::2		ip6-allrouters
+		ff02::1	ip6-allnodes
+		ffo2::2	ip6-allrouters
 		#This Host Address
 		127.0.1.1	SF-Arch
 		```
 		* Set root  password: `passwd`
-		* Install the most **Basic Packages**:
+		* Install **minimal Packages**:
 		```
-		pacman -S base-devel linux linux-headers networkmanager inetutils git reflector inxi dialog 	\
-		alsa-utils pulseaudio dosfstools ntfs-3g bluez bluez-utils pulseudio-bluetooth xdg-utils	\
+		pacman -S base-devel linux-headers networkmanager dialog wpa_supplicant 
 		```
+		* Set up the initramfs:
+			* **Update** `/etc/mkinitcpio.conf` with `MODULES=(btrfs)`
+			* Recreate initramfs with `mkinitcpio -p linux`
+		* Create **user**: `useradd -mG wheel sfikas` and `passwd sfikas`
+		* Edit `/etc/sudoers` file: `EDITOR=nvim visudo` and **uncomment** `%wheel ALL=(ALL) ALL`
+		* **Exit** the chroot environment: `exit`
+* Unmount the arch partition `umount -R /mnt` and `reboot`
 		
-
-## [Nix Package Management](https://nixos.wiki/wiki/Nix_package_manager)  
+* Start Services:
+* Install **Basic Packages**:
+```
+pacman -S network-manager-applet inetutils git inxi alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa \
+openssh reflector bluez bluez-utils dosfstools ntfs-3g xdg_utils bash-completion
+```
 
 	
 				
