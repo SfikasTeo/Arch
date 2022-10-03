@@ -128,27 +128,31 @@ openssh reflector dosfstools ntfs-3g parted ttf-fira-code  	\
 
 systemctl enable sshd
 ```
-## Configuring AUR helper :
+## Configuring the Desktop :
+* ### Configuring AUR helper :
 
-## Setting up Video drivers :
+* ### Setting up Video drivers :
+	* [Intel](https://wiki.archlinux.org/title/intel_graphics#Installation) : `pacman -S xf86-video-intel`
+	* [Nvidia]
+	* [AMD]
+* ### Configuring Xserver and BSPWM :
 
-## Configuring Xserver and BSPWM :
 
-
-## Install packages for **Desktop use** :
+* ### Install packages for **Desktop use** :
 ```
 pacman -S flameshot kitty dragon alsa-utils pulseaudio 		\
 pulseaudio-bluetooth  pulseaudio-alsa bluez bluez-utils 	\
-network-manager-applet
+blueman network-manager-applet
 
 systemctl enable bluetooth
 ```
 
 ## To Do
 * [Power management](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) Add swap space, if needed and enable [hybernation](https://wiki.archlinux.org/title/systemd-boot#Support_hibernation) throught systemd.
-* Guide for AMD GPU.
+* Guide for AMD GPU or Intel GPU.
 * Automation script for steps under installation guide.
 * Performance Improvements for desktop use: pacman - booting etc..
+* Implement some [General Recommendations](https://wiki.archlinux.org/title/General_recommendations)
 
 	
 				
