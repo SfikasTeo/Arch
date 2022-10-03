@@ -22,37 +22,37 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 
 ## [Installation](https://wiki.archlinux.org/title/Installation_guide#Boot_the_live_environment) Proccess
 
-* Set Console Keymap ( US by default ) and select fonts:
+* Set Console Keymap ( US by default ) and select fonts :
 	*  List of available Keymaps: 	`ls /usr/share/kbd/keymaps/**/*.map.gz` . Change using `loadkeys <name>` command.
 	*  List of available Fonts:	`ls /usr/share/kbd/consolefonts/`. Change using `setfont <name>` command.
 * Verify EFI boot mode:	`ls /sys/firmware/efi/efivars` . If the directory exists you are booted into UEFI disk firmware.
-* Check for Internet Access ip -a. Check [iwd](https://wiki.archlinux.org/title/Iwd#iwctl) for Wifi connection.
+* Check for Internet Access: `ip -a` . Use [iwd](https://wiki.archlinux.org/title/Iwd#iwctl) for Wifi connection.
 * Update the system clock: `timedatectl set-ntp true`
-* Configuring **Partitions** and **Filesystems**:
+* Configuring **Partitions** and **Filesystems** :
 	* `lsblk -f` or `fdisk -l` -> List drives  
 	* `blkdiscard /dev/sda` -> Updates the drives firmware to signify that the drive is empty (**SSD** or **NVME** only).  
   	* [Partition Disk](https://wiki.archlinux.org/title/Installation_guide#Partition_the_disks) ( `/dev/sda` ):    
           Any supported partition utility could be used. We will default to GNU **parted** -> `parted`  
 		* Create a **gpt** partition table -> `mklabel gpt`
-		* Create the partitions:  
+		* Create the partitions :  
 		```
-		mkpart NIXBOOT fat32 4mb 1gb  
-		mkpart NIXBTRFS btrfs 1gb 100%
+		mkpart BOOT fat32 4mb 1gb  
+		mkpart BTRFS btrfs 1gb 100%
 		set 1 esp on
 		```
-	* Format the partitions:
+	* Format the partitions :
 	```
-	mkfs.fat -F32 -n NIXBOOT /dev/sda1
-	mkfs.btrfs -L NIXBTRFS /dev/sda2
+	mkfs.fat -F32 -n EFI /dev/sda1
+	mkfs.btrfs -L ROOT /dev/sda2
 	```
-	* Create the Btrfs subvolumes:
+	* Create the Btrfs subvolumes :
 	```
 	mount /dev/sda2 /mnt
 	btrfs su cr /mnt/@
 	btrfs su vr /mnt/@home
 	umount /mnt
 	```
-	* Mount the Filesystems:
+	* Mount the Filesystems :
 	```
 	mount -o rw,ssd,noatime,space_cache=v2,discard=async,compress=zstd:1,subvol=@ /dev/sda2 /mnt
 	mkdir /mnt/home
@@ -61,24 +61,24 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 	mount /dev/sda1 /mnt/boot
 	```
 	Should you use btrfs [compression](https://www.reddit.com/r/btrfs/comments/kul2hh/btrfs_performance/) ? What about the other btrfs [mount options](https://btrfs.readthedocs.io/en/latest/btrfs-man5.html) ?
-* Update the mirrorlist:
+* Update the mirrorlist :
 	* Edit `/etc/pacman.d/mirrorlist` manually
 	* Install reflector: `pacman -Syy && pacman -S reflector` and use `reflector -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist`
-* Install Essential packages using pacstrap:
+* Install Essential packages using pacstrap :
  ```
- pacstrap -i /mnt base linux linux-firmware neovim parted man-pages man-db {amd-ucode or intel-ucode}
+ pacstrap -i /mnt base sudo linux linux-firmware neovim {amd-ucode or intel-ucode}
  ```
- * Configure The system:
- 	* Generate and edit **fstab**: `genfstab -U /mnt >> /mnt/etc/fstab` && `cat /mnt/etc/fstab`
- 	* Change root into the new system: `arch-chroot /mnt`
+ * Configure The system :
+ 	* Generate and edit **fstab** : `genfstab -U /mnt >> /mnt/etc/fstab` && `cat /mnt/etc/fstab`
+ 	* Change root into the new system : `arch-chroot /mnt`
  		* Create symlink for timezone : `ln -sf /usr/share/zoneinfo/Europe/Athens /etc/localetime`
- 		* Synchronize hardware and system clock, create `/etc/adjtime` : `hwclock --systohc --utc`
+ 		* Synchronize hardware and system clock, create `/etc/adjtime` : `hwclock --systohc --localtime`
  			* [Troubleshooting](https://wiki.archlinux.org/title/System_time#Troubleshooting): `ntpd -qg`
  		* Edit `/etc/locale.gen` and **uncomment** `en_US.UTF-8 UTF-8`
 		* Create the [locale](https://wiki.archlinux.org/title/Locale): `locale-gen` and `echo "LANG=en_US.UTF-8" >> /etc/locale.conf`
  		* If keyboard layout was changed edit `/etc/vconsole.conf`
- 		* Edit Hostname: `echo "SF-Arch" >> /etc/hostname`
- 		* Edit LocalHost: `nvim /etc/hosts`
+ 		* Edit Hostname : `echo "SF-Arch" >> /etc/hostname`
+ 		* Edit LocalHost : `nvim /etc/hosts`
  		```
 		#Standard host addresses
 		127.0.0.1	localhost 
@@ -89,24 +89,54 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 		127.0.1.1	SF-Arch
 		```
 		* Set root  password: `passwd`
-		* Install **minimal Packages**:
+		* Install **minimal Packages** :
 		```
-		pacman -S base-devel linux-headers networkmanager dialog wpa_supplicant 
+		pacman -S base-devel linux-headers networkmanager dialog wpa_supplicant btrfs-progs fish
 		```
-		* Set up the initramfs:
-			* **Update** `/etc/mkinitcpio.conf` with `MODULES=(btrfs)`
+		* Set up the initramfs :
+			* **Update** `/etc/mkinitcpio.conf` with `MODULES=(btrfs)` and remove `HOOKS=( fsck )`
 			* Recreate initramfs with `mkinitcpio -p linux`
-		* Create **user**: `useradd -mG wheel sfikas` and `passwd sfikas`
+		* Create **user**: `useradd -mG users,wheel,audio,video -s /bin/fish sfikas` and `passwd sfikas`
 		* Edit `/etc/sudoers` file: `EDITOR=nvim visudo` and **uncomment** `%wheel ALL=(ALL) ALL`
+		* Set up **systemd-boot**
+			* **Warning**  This will work only on UEFI.
+			* Setup systemd-boot : `bootctl --path=/boot install`
+			* Create your bootloader enty : `nvim /boot/loaders/entries/arch.conf`
+			```
+			title Arch Linux
+			linux /vmlinuz-linux
+			initrd {/amd-ucode.img or /intel-ucode.img}
+			initrd /initramfs-linux.img
+			options root=LABEL=ROOT rootflags=subvol=@ rw
+			```
+			* Set the default bootloader entry : `nvim /boot/loader/loader.conf` 
+
+			```
+			default	arch.conf
+			timeout	4
+			console-mode	max
+			editor		no
+			```
+			* Start Services :
+			```
+			systemctl enable NetworkManager
+			systemctl enable bluetooth
+			systemctl enable sshd
+			```
+
 		* **Exit** the chroot environment: `exit`
 * Unmount the arch partition `umount -R /mnt` and `reboot`
 		
-* Start Services:
-* Install **Basic Packages**:
+
+* Install **Basic Packages** :
 ```
 pacman -S network-manager-applet inetutils git inxi alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa \
-openssh reflector bluez bluez-utils dosfstools ntfs-3g xdg_utils bash-completion
+openssh reflector bluez bluez-utils dosfstools ntfs-3g xdg_utils bash-completion parted man-pages man-db ttf-fira-code
 ```
+
+## To Do
+* [Power management](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) Add swap space, if needed and enable [hybernation](https://wiki.archlinux.org/title/systemd-boot#Support_hibernation) throught systemd.
+* 
 
 	
 				
