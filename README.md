@@ -28,7 +28,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 * Verify EFI boot mode:	`ls /sys/firmware/efi/efivars` . If the directory exists you are booted into UEFI disk firmware.
 * Check for Internet Access: `ip -a` . Use [iwd](https://wiki.archlinux.org/title/Iwd#iwctl) for Wifi connection.
 * Update the system clock: `timedatectl set-ntp true`
-* Configuring **Partitions** and **Filesystems** :
+* ##### Configuring **Partitions** and **Filesystems** :
 	* `lsblk -f` or `fdisk -l` -> List drives  
 	* `blkdiscard /dev/sda` -> Updates the drives firmware to signify that the drive is empty (**SSD** or **NVME** only).  
   	* [Partition Disk](https://wiki.archlinux.org/title/Installation_guide#Partition_the_disks) ( `/dev/sda` ):    
@@ -61,15 +61,15 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 	mount /dev/sda1 /mnt/boot
 	```
 	Should you use btrfs [compression](https://www.reddit.com/r/btrfs/comments/kul2hh/btrfs_performance/) ? What about the other btrfs [mount options](https://btrfs.readthedocs.io/en/latest/btrfs-man5.html) ?
-* Update the mirrorlist :
+* ##### Update the mirrorlist :
 	* Edit `/etc/pacman.d/mirrorlist` manually
 	* Install reflector: `pacman -Syy && pacman -S reflector` and use `reflector -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist`
-* Install Essential packages using pacstrap :
+* ##### Install Essential packages using pacstrap :
  ```
  pacstrap -i /mnt base sudo linux linux-firmware neovim {amd-ucode or intel-ucode}
  ```
- * Configure The system :
- 	* Generate and edit **fstab** : `genfstab -U /mnt >> /mnt/etc/fstab` && `cat /mnt/etc/fstab`
+ * ##### Configure The system :
+ 	* Generate and edit **fstab** : `genfstab -L /mnt >> /mnt/etc/fstab` && `cat /mnt/etc/fstab`
  	* Change root into the new system : `arch-chroot /mnt`
  		* Create symlink for timezone : `ln -sf /usr/share/zoneinfo/Europe/Athens /etc/localetime`
  		* Synchronize hardware and system clock, create `/etc/adjtime` : `hwclock --systohc --localtime`
@@ -91,7 +91,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 		* Set root  password: `passwd`
 		* Install **minimal Packages** :
 		```
-		pacman -S base-devel linux-headers networkmanager dialog wpa_supplicant btrfs-progs fish
+		pacman -S base-devel linux-headers networkmanager dialog wpa_supplicant btrfs-progs fish git
 		```
 		* Set up the initramfs :
 			* **Update** `/etc/mkinitcpio.conf` with `MODULES=(btrfs)` and remove `HOOKS=( fsck )`
@@ -109,7 +109,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 			initrd /initramfs-linux.img
 			options root=LABEL=ROOT rootflags=subvol=@ rw
 			```
-			* Set the default bootloader entry : `nvim /boot/loader/loader.conf` 
+			* Set the default bootloader entry : `nvim /boot/loader/loader.conf`   
 
 			```
 			default	arch.conf
@@ -117,26 +117,38 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 			console-mode	max
 			editor		no
 			```
-			* Start Services :
-			```
-			systemctl enable NetworkManager
-			systemctl enable bluetooth
-			systemctl enable sshd
-			```
-
+			* Start NetworkManager Service : `systemctl enable NetworkManager`
 		* **Exit** the chroot environment: `exit`
-* Unmount the arch partition `umount -R /mnt` and `reboot`
-		
+* ##### Unmount the arch partition `umount -R /mnt` and `reboot`
 
-* Install **Basic Packages** :
+## Install **Basic Packages** :
 ```
-pacman -S network-manager-applet inetutils git inxi alsa-utils pulseaudio pulseaudio-bluetooth pulseaudio-alsa \
-openssh reflector bluez bluez-utils dosfstools ntfs-3g xdg_utils bash-completion parted man-pages man-db ttf-fira-code
+pacman -S inetutils inxi xdg_utils man-pages man-db 		\
+openssh reflector dosfstools ntfs-3g parted ttf-fira-code  	\
+
+systemctl enable sshd
+```
+## Configuring AUR helper :
+
+## Setting up Video drivers :
+
+## Configuring Xserver and BSPWM :
+
+
+## Install packages for **Desktop use** :
+```
+pacman -S flameshot kitty dragon alsa-utils pulseaudio 		\
+pulseaudio-bluetooth  pulseaudio-alsa bluez bluez-utils 	\
+network-manager-applet
+
+systemctl enable bluetooth
 ```
 
 ## To Do
 * [Power management](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) Add swap space, if needed and enable [hybernation](https://wiki.archlinux.org/title/systemd-boot#Support_hibernation) throught systemd.
-* 
+* Guide for AMD GPU.
+* Automation script for steps under installation guide.
+* Performance Improvements for desktop use: pacman - booting etc..
 
 	
 				
