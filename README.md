@@ -129,16 +129,24 @@ openssh reflector dosfstools ntfs-3g parted ttf-fira-code  	\
 systemctl enable sshd
 ```
 ## Configuring the Desktop :
-* ### Configuring AUR helper :
+* #### Configuring [AUR helper](https://wiki.archlinux.org/title/AUR_helpers) :
+The suggested aur helpers are either [Yay](https://github.com/Jguer/yay) based on Go programming language,  
+and [Paru](https://github.com/Morganamilo/paru) based on Rust. The installation process is almost the same for both.
+```
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+```
 
-* ### Setting up Video drivers :
+* #### Setting up Video drivers :
 	* [Intel](https://wiki.archlinux.org/title/intel_graphics#Installation) : `pacman -S xf86-video-intel`
-	* [Nvidia]
-	* [AMD]
-* ### Configuring Xserver and BSPWM :
+	* [Nvidia](https://wiki.archlinux.org/title/NVIDIA) / [Nouveau](https://wiki.archlinux.org/title/Nouveau)
+	* [AMD](https://wiki.archlinux.org/title/AMDGPU) : `pacman -S xf86-video-amdgpu`
+
+* #### Configuring [Xserver](https://wiki.archlinux.org/title/Category:X_server) and [BSPWM](https://wiki.archlinux.org/title/Bspwm) :
 
 
-* ### Install packages for **Desktop use** :
+* #### Install packages for **Desktop use** :
 ```
 pacman -S flameshot kitty dragon alsa-utils pulseaudio 		\
 pulseaudio-bluetooth  pulseaudio-alsa bluez bluez-utils 	\
@@ -149,7 +157,7 @@ systemctl enable bluetooth
 
 ## To Do
 * [Power management](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) Add swap space, if needed and enable [hybernation](https://wiki.archlinux.org/title/systemd-boot#Support_hibernation) throught systemd.
-* Guide for AMD GPU or Intel GPU.
+* Guide for Nvidia. AMD or Intel GPU.
 * Automation script for steps under installation guide.
 * Performance Improvements for desktop use: pacman - booting etc..
 * Implement some [General Recommendations](https://wiki.archlinux.org/title/General_recommendations)
