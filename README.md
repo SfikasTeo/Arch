@@ -26,7 +26,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 	*  List of available Keymaps: 	`ls /usr/share/kbd/keymaps/**/*.map.gz` . Change using `loadkeys <name>` command.
 	*  List of available Fonts:	`ls /usr/share/kbd/consolefonts/`. Change using `setfont <name>` command.
 * Verify EFI boot mode:	`ls /sys/firmware/efi/efivars` . If the directory exists you are booted into UEFI disk firmware.
-* Check for Internet Access: `ip -a` . Use [iwd](https://wiki.archlinux.org/title/Iwd#iwctl) for Wifi connection.
+* Check for Internet Access: `ip a` . Use [iwd](https://wiki.archlinux.org/title/Iwd#iwctl) for Wifi connection.
 * Update the system clock: `timedatectl set-ntp true`
 * ##### Configuring **Partitions** and **Filesystems** :
 	* `lsblk -f` or `fdisk -l` -> List drives  
@@ -63,7 +63,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 	Should you use btrfs [compression](https://www.reddit.com/r/btrfs/comments/kul2hh/btrfs_performance/) ? What about the other btrfs [mount options](https://btrfs.readthedocs.io/en/latest/btrfs-man5.html) ?
 * ##### Update the mirrorlist :
 	* Edit `/etc/pacman.d/mirrorlist` manually
-	* Install reflector: `pacman -Syy && pacman -S reflector` and use `reflector -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist`
+	* [Reflector](https://man.archlinux.org/man/reflector.1) : `reflector -l 20 --verbose --sort rate --save /etc/pacman.d/mirrorlist`
 * ##### Install Essential packages using pacstrap :
  ```
  pacstrap -i /mnt base sudo linux linux-firmware neovim {amd-ucode or intel-ucode}
@@ -123,15 +123,15 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 
 ## Install **Basic Packages** :
 ```
-pacman -S inetutils inxi xdg_utils man-pages man-db 		\
+pacman -S inetutils lm_sensors xdg-utils man-pages man-db 	\
 openssh reflector dosfstools ntfs-3g parted ttf-fira-code  	\
 
 systemctl enable sshd
 ```
 ## Configuring the Desktop :
 * #### Configuring [AUR helper](https://wiki.archlinux.org/title/AUR_helpers) :
-The suggested aur helpers are either [Yay](https://github.com/Jguer/yay) based on Go programming language,  
-and [Paru](https://github.com/Morganamilo/paru) based on Rust. The installation process is almost the same for both.
+The suggested aur helpers are either [Yay](https://github.com/Jguer/yay), based on Go, or [Paru](https://github.com/Morganamilo/paru) based on Rust.  
+The installation process is almost the same for both.
 ```
 git clone https://aur.archlinux.org/paru.git
 cd paru
@@ -144,12 +144,13 @@ makepkg -si
 	* [AMD](https://wiki.archlinux.org/title/AMDGPU) : `pacman -S xf86-video-amdgpu`
 
 * #### Configuring [Xserver](https://wiki.archlinux.org/title/Category:X_server) and [BSPWM](https://wiki.archlinux.org/title/Bspwm) :
+	* Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit bspwm sxhkd picom polybar feh`
+	* Install **Audio** functionality : `pacman -S alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth`
 
 
 * #### Install packages for **Desktop use** :
 ```
-pacman -S flameshot kitty dragon alsa-utils pulseaudio 		\
-pulseaudio-bluetooth  pulseaudio-alsa bluez bluez-utils 	\
+pacman -S flameshot kitty dragon  bluez bluez-utils 	\
 blueman network-manager-applet
 
 systemctl enable bluetooth
