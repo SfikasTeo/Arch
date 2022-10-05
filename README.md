@@ -91,7 +91,8 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 		* Set root  password: `passwd`
 		* Install **minimal Packages** :
 		```
-		pacman -S base-devel linux-headers networkmanager dialog wpa_supplicant btrfs-progs fish git
+		pacman -S base-devel linux-headers networkmanager  \
+			wpa_supplicant btrfs-progs fish git dialog
 		```
 		* Set up the initramfs :
 			* **Update** `/etc/mkinitcpio.conf` with `MODULES=(btrfs)` and remove `HOOKS=( fsck )`
@@ -144,9 +145,13 @@ makepkg -si
 	* [AMD](https://wiki.archlinux.org/title/AMDGPU) : `pacman -S xf86-video-amdgpu`
 
 * #### Configuring [Xserver](https://wiki.archlinux.org/title/Category:X_server) and [BSPWM](https://wiki.archlinux.org/title/Bspwm) :
-	* Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit bspwm sxhkd picom polybar feh`
+	* Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit xorg-xrandr bspwm sxhkd picom polybar feh`
 	* Install **Audio** functionality : `pacman -S alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth`
-
+	* The **lack** of Display Manager is complemented by the **xorg-xinit** package as means of initializing the Xserver.  
+	After configurating the system, the `startχ` command **starts** the X environment and the Window manager of choise.  
+	The **startx wrapper** uses the `~/.xinitrc` configuration file. The running configs are located at [**dots**](https://github.com/SfikasTeo/Arch/tree/main/dots) folder
+	
+		
 
 * #### Install packages for **Desktop use** :
 ```
