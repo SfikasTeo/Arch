@@ -3,13 +3,8 @@
 # Terminal (kitty)
 super + t
 	kitty
-
-# Terminal (floating)
-super + shift + t
-	kitty --float
-
-super + return
-	kitty --float	
+super + b
+	brave
 
 ##---------- Rofi Launcher & Menus ----------##
 
@@ -34,15 +29,15 @@ XF86AudioMicMute
 ##---------- Bspwm ----------##
 
 # close and kill
-super + {_,shift + }c
+super + {c,q}
 	bspc node -{c,k}
 
 # kill window
-super + q
+super + Escape
     xkill
 
 # Quit/Restart bspwm or sxhkd
-ctrl + shift + {q,r,Escape}
+ctrl + alt + {q,r,Escape}
 	bspc {quit,wm -r,pkill -USR1 -x sxhkd}
 	
 # Split horizontal, vertical or cancel
@@ -57,10 +52,6 @@ super + {a,s}
 super + f
     bspc node -t "~"fullscreen
  
-# swap the current node and the biggest window
-super + g
-	bspc node -s biggest.window
-
 # Toggle beetwen floating & tiled
 super + space
     bspc node -t "~"{floating,tiled}
