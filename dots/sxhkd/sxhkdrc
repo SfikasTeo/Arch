@@ -1,0 +1,80 @@
+##---------- Keybindings for bspwm ----------##
+
+# Terminal (kitty)
+super + t
+	kitty
+
+# Terminal (floating)
+super + shift + t
+	kitty --float
+
+super + return
+	kitty --float	
+
+##---------- Rofi Launcher & Menus ----------##
+
+##---------- Applications ----------##
+
+##---------- System Keys ----------##
+
+# Brighness control
+XF86MonBrightness{Up,Down}
+	brightness{ --inc, --dec}
+	
+# Volume control
+XF86Audio{RaiseVolume,LowerVolume}
+	volume{ --inc, --dec}
+
+XF86AudioMute
+	volume --toggle
+
+XF86AudioMicMute
+	volume --toggle-mic
+
+##---------- Bspwm ----------##
+
+# close and kill
+super + {_,shift + }c
+	bspc node -{c,k}
+
+# kill window
+super + q
+    xkill
+
+# Quit/Restart bspwm or sxhkd
+ctrl + shift + {q,r,Escape}
+	bspc {quit,wm -r,pkill -USR1 -x sxhkd}
+	
+# Split horizontal, vertical or cancel
+super + {h,v,q}
+	bspc node -p {east,south,cancel}
+
+# Fullscreen or Monocle
+super + f
+    bspc node -t "~"fullscreen
+
+# Toggle beetwen floating & tiled
+super + space
+    bspc node -t "~"{floating,tiled}
+
+# Pseudo Tiled & tiled mode
+super + shift + space
+    bspc node -t "~"{pseudo_tiled,tiled}
+
+# Send the window to another edge of the screen
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -s {west,south,north,east}
+
+# Change focus to window
+super + alt + {Left,Down,Up,Right}
+	bspc node -f {west,south,north,east}
+
+# Switch workspace implititly
+super + {Left,Right}
+	bspc desktop -f {prev.local,next.local}
+	
+# Focus or Send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+##---------- EOF ----------##
