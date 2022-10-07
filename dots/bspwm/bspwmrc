@@ -43,6 +43,11 @@ bspc rule -r *:*
 
 pgrep -x sxhkd > /dev/null || sxhkd &		# Start shortcuts
 pkill picom					# Kill picom
-picom--experimental-backends & 			# Restart picom
+picom--experimental-backends 			# Restart picom
+
+#dunst &
+#udiskie &
+#flameshot &
+
 feh --bg-fill ~/Pictures/wallpaper		# Set wallpaper
 #~/.config/polybar/launch.sh			# Start polybar
