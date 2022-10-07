@@ -49,28 +49,41 @@ ctrl + shift + {q,r,Escape}
 super + {h,v,q}
 	bspc node -p {east,south,cancel}
 
+# set the node flags
+super + {a,s}
+	bspc node -g {sticky,private}
+
 # Fullscreen or Monocle
 super + f
     bspc node -t "~"fullscreen
+ 
+# swap the current node and the biggest window
+super + g
+	bspc node -s biggest.window
 
 # Toggle beetwen floating & tiled
 super + space
     bspc node -t "~"{floating,tiled}
 
-# Pseudo Tiled & tiled mode
-super + shift + space
-    bspc node -t "~"{pseudo_tiled,tiled}
-
 # Send the window to another edge of the screen
 super + ctrl + {Left,Down,Up,Right}
+	bspc node -s {west,south,north,east}
+
+super + ctrl + {h,j,k,l}
 	bspc node -s {west,south,north,east}
 
 # Change focus to window
 super + alt + {Left,Down,Up,Right}
 	bspc node -f {west,south,north,east}
 
-# Switch workspace implititly
+super + alt + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+# Switch workspace relatively
 super + {Left,Right}
+	bspc desktop -f {prev.local,next.local}
+
+super + {h,l}
 	bspc desktop -f {prev.local,next.local}
 	
 # Focus or Send to the given desktop
