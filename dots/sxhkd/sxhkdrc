@@ -41,7 +41,7 @@ ctrl + alt + {q,r,Escape}
 	bspc {quit,wm -r,pkill -USR1 -x sxhkd}
 	
 # Split horizontal, vertical or cancel
-super + {h,v,q}
+super + {h,v,u}
 	bspc node -p {east,south,cancel}
 
 # set the node flags
