@@ -1,7 +1,6 @@
 #! /bin/bash
 
 ## Run as root 
-
 if [[ $EUID -ne 0 ]]; then
   echo "You must be super user in order to run this script"
   exit 1
@@ -11,9 +10,10 @@ fi
 chmod +x ./bspwm/bspwmrc
 # chmod +x ./sxhkd/sxhkdrc
 
+## Remove previous configs
+rm -rf ~/.config/{bspwm,kitty,picom,sxhkd,fish}
 
 ## Place files at the filesystem
-
 cp -r bspwm ~/.config/
 cp -r kitty ~/.config/
 cp -r picom ~/.config/
