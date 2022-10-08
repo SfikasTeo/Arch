@@ -35,6 +35,7 @@ bspc rule -r *:*
 
 ## Autostart -------------------------------------------------#
 
+xrandr -s 1920x1080 &				# Set resolution
 pgrep -x sxhkd > /dev/null || sxhkd &		# Start shortcuts
 pkill picom					# Kill picom
 picom--experimental-backends 			# Restart picom
