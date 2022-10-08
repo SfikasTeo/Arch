@@ -148,8 +148,16 @@ makepkg -si
 	* Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit xorg-xrandr bspwm sxhkd picom polybar feh`
 	* Install **Audio** functionality : `pacman -S alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth`
 	* The **lack** of Display Manager is complemented by the **xorg-xinit** package as means of initializing the Xserver.  
-	After configurating the system, the `startχ` command **starts** the X environment and the Window manager of choise.  
-	The **startx wrapper** uses the `~/.xinitrc` configuration file. The running configs are located at [**dots**](https://github.com/SfikasTeo/Arch/tree/main/dots) folder
+	After configurating the system, the `startx` command **starts** the X environment and the Window manager of choise.  
+	The **startx wrapper** uses the `~/.xinitrc` configuration file. The running configs are located at the [**dots**](https://github.com/SfikasTeo/Arch/tree/main/dots) folder.  
+	**Dont forget that the sourced configuration files must be **executable**.
+	* In order to set the desired resolution:
+		* For [multimonitor systems](https://wiki.archlinux.org/title/Multihead#Extended_Screen_using_XRandR_and_an_xorg.conf_file), consider the use of `xorg.conf` :
+			* From **tty** run `X -configure`. 
+			* `xorg.conf.new` Will be generated and it can be tested using `X -config xorg.conf.new`
+			* `cp xorg.conf.new /etc/X11/xorg.conf` to make the generated config permanent.
+			* Edit `/etc/X11/xorg.conf` 
+		* Use `xrandr -s <width x height>` at **startup** 
 	
 		
 
