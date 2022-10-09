@@ -141,6 +141,8 @@ makepkg -si
 
 * #### Setting up Video drivers :
 	* [Intel](https://wiki.archlinux.org/title/intel_graphics#Installation) : `pacman -S xf86-video-intel`
+	Intel graphical drivers are mostly plug and play, Installing the **optional** package dependencies may be worth looking into.
+	
 	* [Nvidia](https://wiki.archlinux.org/title/NVIDIA) / [Nouveau](https://wiki.archlinux.org/title/Nouveau)
 	* [AMD](https://wiki.archlinux.org/title/AMDGPU) : `pacman -S xf86-video-amdgpu`
 
@@ -150,14 +152,23 @@ makepkg -si
 	* The **lack** of Display Manager is complemented by the **xorg-xinit** package as means of initializing the Xserver.  
 	After configurating the system, the `startx` command **starts** the X environment and the Window manager of choise.  
 	The **startx wrapper** uses the `~/.xinitrc` configuration file. The running configs are located at the [**dots**](https://github.com/SfikasTeo/Arch/tree/main/dots) folder.  
-	**Dont forget that the sourced configuration files must be **executable**.
-	* In order to set the desired resolution:
-		* For [multimonitor systems](https://wiki.archlinux.org/title/Multihead#Extended_Screen_using_XRandR_and_an_xorg.conf_file), consider the use of `xorg.conf` :
-			* From **tty** run `X -configure`. 
-			* `xorg.conf.new` Will be generated and it can be tested using `X -config xorg.conf.new`
-			* `cp xorg.conf.new /etc/X11/xorg.conf` to make the generated config permanent.
-			* Edit `/etc/X11/xorg.conf` 
-		* Use `xrandr -s <width x height>` at **startup** 
+	**Dont forget that the sourced configuration files must be executable**.
+	* In order to set the desired resolution, use `xrandr -s <width x height>` at **startup** or look into [xorg.conf](https://wiki.archlinux.org/title/Multihead#Extended_Screen_using_XRandR_and_an_xorg.conf_file)
+	* Setting up **[keyboard layouts](https://wiki.archlinux.org/title/Xorg/Keyboard_configuration)**:
+		* Using `setxkbmap -layout us,gr -option win_space_toggle` sets the layouts for the current X session.  
+		This can be made **pseudo-permanent** by including this command at `~/.xinitrc`
+		* Using **X configuration files** at `/etc/X11/xorg.conf.d/00-keyboard.conf` as follows:
+		```
+		Section "InputClass"
+        		Identifier "system-keyboard"
+        		MatchIsKeyboard "on"
+        		Option "XkbLayout" "us,gr"
+        	        Option "XkbOptions" "grp:win_space_toggle"
+		EndSection
+		```
+	* 
+
+		
 	
 		
 
