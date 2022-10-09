@@ -155,9 +155,8 @@ makepkg -si
 ```
 
 * #### Setting up Video drivers :
-	* [Intel](https://wiki.archlinux.org/title/intel_graphics#Installation) : `pacman -S xf86-video-intel`
+	* [Intel](https://wiki.archlinux.org/title/intel_graphics#Installation) : `pacman -S xf86-video-intel`   
 	Intel graphical drivers are mostly plug and play, Installing the **optional** package dependencies may be worth looking into.
-	
 	* [Nvidia](https://wiki.archlinux.org/title/NVIDIA) / [Nouveau](https://wiki.archlinux.org/title/Nouveau)
 	* [AMD](https://wiki.archlinux.org/title/AMDGPU) : `pacman -S xf86-video-amdgpu`
 
