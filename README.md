@@ -1,9 +1,24 @@
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#arch">Arch</a></li>
-  </ol>
+ 	<summary>Table of Contents</summary>
+  	<ol>
+    		<li><a href='#arch-'>Arch</a></li>
+		<li><a href='#starting-up-the-main-resources-that-will-be-of-use-for-the-installation-guide'>Documentation</a></li>
+		<li><a href='#installation-proccess'>Installation</a></li>
+		<ol>
+			<li><a href='#configuring-partitions-and-filesystems-'>Configuring partitions and Filesystems</a></li>
+			<li><a href='#update-the-mirrorlist-'>Update-the-Mirrorlist</a></li>
+			<li><a href='#install-essential-packages-using-pacstrap-'>Pacstrap</a></li>
+			<li><a href='#configure-the-system-'>Configure the System</a></li>
+			<li><a href='#unmount-the-arch-partition-umount--r-mnt-and-reboot'>Unmount the Partition</a></li>
+		</ol>
+		<li><a href='#install-basic-packages-'>Basic Packages</a></li>
+		<li><a href='#configuring-the-desktop-'></a>Creating the Desktop</li>
+    		<li><a href='#'></a></li>
+		<li><a href='#'></a></li>
+		<li><a href='#'></a></li>
+		<li><a href='#'></a></li>
+  	</ol>
 </details>
 
 # [Arch](https://wiki.archlinux.org/title/Arch_Linux) [<img src="https://github.com/SfikasTeo/Arch/blob/main/Arch_Logo.png" width="220" align="right" alt="Arch">](https://wiki.archlinux.org/)
