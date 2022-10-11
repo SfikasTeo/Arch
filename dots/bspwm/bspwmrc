@@ -32,17 +32,12 @@ bspc config single_monocle false
 # remove all rules first
 bspc rule -r *:*
 
-
 ## Autostart -------------------------------------------------#
 
 xrandr -s 1920x1080 &				# Set resolution
 pgrep -x sxhkd > /dev/null || sxhkd &		# Start shortcuts
-pkill picom					# Kill picom
-picom--experimental-backends 			# Restart picom
-
-#dunst &
-#udiskie &
-#flameshot &
+pkill picom 					# Kill picom
+picom --experimental-backends &			# Restart picom
 
 feh --bg-fill ~/Pictures/wallpaper		# Set wallpaper
 #~/.config/polybar/launch.sh			# Start polybar
