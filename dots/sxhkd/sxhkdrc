@@ -1,3 +1,62 @@
-# terminal emulator
+##---------- Keybindings for bspwm ----------##
+
+# Terminal (kitty)
 super + t
 	kitty
+super + b
+	brave
+	
+##---------- Bspwm ----------##
+
+# close and kill
+super + {q,c}
+	bspc node -{c,k}
+
+# kill window
+super + Escape
+	xkill
+
+# Quit/Restart bspwm or sxhkd
+ctrl + alt + q
+	bspc quit
+	
+# Split horizontal, vertical or cancel
+super + {h,v,u}
+	bspc node -p {east,south,cancel}
+
+# set the node flags
+super + {a,s}
+	bspc node -g {sticky,private}
+
+# Fullscreen or Monocle
+super + f
+	bspc node -t "~"fullscreen
+ 
+# Toggle beetwen floating & tiled
+ctrl + space
+	bspc node -t "~"{floating,tiled}
+
+# Send the window to another edge of the screen
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -s {west,south,north,east}
+
+super + ctrl + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+# Change focus to window
+super + alt + {Left,Down,Up,Right}
+	bspc node -f {west,south,north,east}
+
+#super + alt + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+# Switch workspace relatively
+super + {Left,Right}
+	bspc desktop -f {prev.local,next.local}
+
+super + {h,l}
+	bspc desktop -f {prev.local,next.local}
+	
+# Focus or Send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
