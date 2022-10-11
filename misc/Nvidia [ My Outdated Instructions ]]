@@ -1,0 +1,41 @@
+# lspci -k | grep -A 2 -E "(VGA|3D)"
+# inxi -b
+# -> to check the current nvidia driver in use.
+
+# First step -> visit the nvidia website and see the driver version suited to your graphics card
+# https://www.nvidia.com/download/index.aspx
+
+# By default you will be using the Neauvou open source graphical drivers.
+
+# Second step -> READ :
+    # https://wiki.archlinux.org/title/NVIDIA
+    # https://wiki.archlinux.org/title/Dynamic_Kernel_Module_Support#Installation
+        # DKMS allow for automatic module rebuilding on kernel updates.
+    
+    # Different ways:
+        # nvidia-all git repository:
+            # git clone https://github.com/Frogging-Family/nvidia-all.git
+            # cd nvidia-all
+            # makepkg -si
+        # nvidia-dkms package
+        
+
+# After installing ( Xorg intergration ):
+    # install nvidia-settings and run: nvidia-xconfig
+    # GoTo nvidia-settings Configuration, tick everything ->
+    # apply and save to X Configuration file
+    
+    # AutoStart -> Load the ~/.nvidia-settings-rc
+    #           -> Create a service during Xorg startup
+    #           -> nvidia-settings --load-config-only
+
+# Nvidia Settings apps ->
+    # nvtop -> tui application about nvidia info
+    # nvidia-smi -> terminal nvidia card detailed system information
+    # nvidia-settings-> X server intergration
+    # gwe -> Graphical interface for controlling everything about the card.
+    #     -> Overclocking, power-draw, usage-frequency, fan speeds, etc
+
+# Vulkan ->
+    # Vulkan is a low-overhead, cross-platform 3D graphics and compute API.
+    # https://wiki.archlinux.org/title/Vulkan
