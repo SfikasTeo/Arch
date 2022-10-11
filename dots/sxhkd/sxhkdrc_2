@@ -34,7 +34,7 @@ super + {q,c}
 
 # kill window
 super + Escape
-    xkill
+	xkill
 
 # Quit/Restart bspwm or sxhkd
 ctrl + alt + q
@@ -67,7 +67,7 @@ super + ctrl + {h,j,k,l}
 super + alt + {Left,Down,Up,Right}
 	bspc node -f {west,south,north,east}
 
-super + alt + {h,j,k,l}
+#super + alt + {h,j,k,l}
 	bspc node -s {west,south,north,east}
 
 # Switch workspace relatively
