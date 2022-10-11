@@ -5,6 +5,26 @@ super + t
 	kitty
 super + b
 	brave
+
+##---------- Rofi Launcher & Menus ----------##
+
+##---------- Applications ----------##
+
+##---------- System Keys ----------##
+
+# Brighness control
+XF86MonBrightness{Up,Down}
+	brightness{ --inc, --dec}
+	
+# Volume control
+XF86Audio{RaiseVolume,LowerVolume}
+	volume{ --inc, --dec}
+
+XF86AudioMute
+	volume --toggle
+
+XF86AudioMicMute
+	volume --toggle-mic
 	
 ##---------- Bspwm ----------##
 
