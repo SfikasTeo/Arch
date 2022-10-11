@@ -1,0 +1,165 @@
+Sources:
+    ArchWiki:
+    https://wiki.archlinux.org/title/Installation_guide#Pre-installation ARCHWIKI
+    https://wiki.archlinux.org/title/EFI_system_partition#GPT_partitioned_disks GPT partition
+    https://wiki.archlinux.org/title/EFI_system_partition#GPT_partitioned_disks EFI system partition
+    https://wiki.archlinux.org/title/Btrfs#Mounting_subvolumes BTRFS subvolumes
+    https://wiki.archlinux.org/title/Arch_boot_process#Boot_loader Arch Boot Process
+    
+    Youtube:
+    https://www.youtube.com/watch?v=Xynotc9BKe8 installation walkthrought with btrfs
+    https://www.youtube.com/watch?v=dtuy09mqBPI&list=PL4U7AoXFrSm6hvvZqfBIyLgyh8vTW1Qyk&index=15&t=285s How to Eliminate DM
+  
+ Comments:
+ 
+    setfont: setfont ter-132n (For a big font) or maybe arm8(for a smaller font) 
+ 
+    Internet: Arch uses by default the iwd (net wireless deamon by intel for internet connection)
+        check ip addr ( or ip a) for the ip specifications. 
+    WIFI: 
+        iwdctl -> 
+            device list -> list of wireless interfaces you have installed in your system 
+            station wlan0 (the wireless device name) scan -> triggers your wifi card to scan available networks
+            station wlan0 get-networks -> show available scanned networks
+            station wlan0 connect "ChosenNetwork"
+ 
+ Starting steps:
+    Set timedate:
+            # timedatectl set-ntp true //setting the time zone (ntp = network Time Protocol) - timedatectl status (In vms this may not work correctly)
+            ( timedatectl set-timezone Europe/Athens may be needed )
+    Partition disk:
+            fdisk -l -> find the recognized disks
+            fdisk /dev/sda -> enter the fdisk menu
+                p -> prints all the partitions 
+                g -> create a new gtp partition table
+                n -> create a new partition
+                t -> change the type of a partition
+                w -> write the changes // q -> quit without saving changes
+                F -> list free unpartiotioned space 
+                d -> delete a partition
+                
+            Typical case: g -> n (at least 2 or 3 with linux swap) -> t (One Efi partiton and maybe one LVM partition instead of linux filesystem) -> w
+            Defining the type of the created partitions using t -> 1 (EFI) 19(LINUX SWAP) 20(LINUX FILESYSTEM) 30(LINUX LVM)
+            
+    Setting up the filesystem:
+            lsblk -f -> another way to see the filesystem
+            mkfs.fat -F32 /dev/sdaX
+            mkswap /dev/sdaZ -> to activate the swap: swapon /dev/sdaZ (Now swap is mounted)
+            mkfs.btrfs /dev/sdaY | mkfs.ext4 /dev/sdaY -> moving on we will use btrfs as our typical case
+            
+            Btrfs subvolumes creation:
+                mount /dev/sdaY /mnt    -> create the btrfs subvolumes
+                btrfs su cr (or subvolume create) /mnt/@    -> root directory
+                btrfs su cr /mnt/@home
+                btrfs su cr /mnt/@snapshots
+                btrfs su cr /mnt/@var_log
+                umount /mnt         -> we will start mounting partitions now
+                                
+            filesystem mounting:
+                mkdir -p /mnt/{boot,home,.snapshots,var_log} (instead of /mnt/boot we may use /efi if we create it but this is not supported by systemd-boot (i think))
+                mount /dev/sdaX /mnt/boot       (We could use /efi if we have created it but we will go with this method (Trial and tested))
+                mount -o ssd,noatime,space_cache=v2,subvol=@ /dev/sdaY /mnt             (maybe compress=lzo if space is limited)
+                mount -o ssd,noatime,space_cache=v2,subvol=@home /dev/sdaY /mnt/home
+                mount -o ssd,noatime,space_cache=v2,subvol=@snapshots /dev/sdaY /mnt/.snapshots
+                mount -o ssd,noatime,space_cache=v2,subvol=@var_log /dev/sdaY /mnt/var_log
+  
+    Starting the installation:
+        pacstrap /mnt base linux linux-firmware neovim (or vim) amd-ucode (or intel ucode)
+        
+        We now need to generate a partition table:
+            genfstab -U /mnt >> /mnt/etc/fstab
+            cat /mnt/etc/fstab -> for checking reasons -> CHECK every partition
+            
+        Enter the installation directory
+            arch-chroot /mnt
+                Location stuff: ln -sf /usr/share/zoneinfo/Europe/Athens /etc/localetime
+                hwclock --systohc (synchronize the hardware clock with the system clock)
+                
+                Enter the locale.gen -> nvim/nano /etc/locale.gen -> uncomment the en_US.UTF-8 UTF-8 -> save&exit
+                locale-gen
+                echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+                echo "<machineHostname>" >> /etc/hostname
+                
+                Work on the localhost:
+                    nvim/nano /etc/hosts ->
+                        127.0.0.1 (tab) localhost (ipv4)
+                        ::1     localhost (ipv6)
+                        127.0.1.1   <hostname>.localdomain  <hostname>
+                
+                passwd -> set root user password
+                
+                Basic packages:
+                    pacman -S bash-completion base-devel linux-headers networkmanager inetutils alsa-utils pulseaudio git grub efibootmgr reflector snapper dialog mtools dosfstools xdg-utils xdg-user-dirs (wpa_supplicant -> for wifi wpa) (bluez bluez-utils pulseaudio-bluetooth -> for bluethooth) (cups hplip  -> for printers) (os-prober for dual booting) 
+                    
+                 Making the mkinitcpio -> new initramfs:
+                    nvim /etc/mkinitcpio.conf -> put btrfs, (nvidia or amdgpu) in modules and maybe delete fsck from hooks((after installation)
+                    mkinitcpio -p linux (WARNING: i had a problem with the command due to the Kernel module not beeing found -> pacman -S linux seemed to solve it )
+                    
+                 Grub installation: 
+                    grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+                    grub-mkconfig -o /boot/grub/grub.cfg
+                    nvim /etc/default/grub -> ....loglevel=3 quiet video=1920x1080" and maybe change the GRUB_GFXMODE -> the wanted resolution
+                    grub-mkconfig -o /boot/grub/grub.cfg
+                 Starting Deamons:
+                    systemctl enable NetworkManager
+                 User creation:
+                    useradd -mG wheel <username>
+                    passwd <username>
+                    EDITOR=nvim visudo -> (uncomment the first wheel group) -> save&exit (give admin privileges to the wheel group)
+                 Exit the installation -> exit (or C+d)
+        umount -a (unmount all partitions)
+        !!REBOOT!!
+        
+    Setting up Snapper:
+        sudo umount /.snapshots
+        sudo rm -r /.snapshots
+        sudo snapper -c root create-config / -> at the root volume -> this creates a new btrfs subvolume
+        -> i had an error with locale although the root config was created ... so i dont know how well it worked
+        sudo btrfs su de /.snapshots 
+        sudo mkdir /.snapshots
+        sudo mount -a or (# mount -o subvol=@snapshots /dev/sda1 /.snapshots)
+        sudo chmod 750 /.snapshots
+        sudo nvim /etc/snapper/configs/root -> change allow users -> add <username> -> change the amount of snapshots saved -> maybe set hourly snapshots/cleanup -> no
+        sudo chmod a+rx /.snapshots
+        sudo chown :sfikas /.snapshots
+        
+        sudo systemctl enable --now snapper-timeline.timer
+        sudo systemctl enable --now snapper-cleanup.timer
+                -> we should change the frequency of the called timers by editing the (https://wiki.archlinux.org/title/Snapper#Preventing_slowdowns)
+                
+    Setting up yay from aur:
+        git clone https://aur.archlinux.org/yay
+        cd yay 
+        makepkg -si PKGBUILD
+    
+    Setting up Snapper with grub:
+        yay -S snap-pac-grub (snapper-gui)
+    
+    Setting up video drivers (necessary for machine installations):
+        intel -> xf86-video-intel
+        amd -> xf86-video-amdgpu and maybe  amdgpu-pro-libgl(AUR)
+        nvidia -> nvidia nvidia-utils nvidia-settings AND (https://github.com/Frogging-Family/nvidia-all) -> for all nvidia drivers
+    
+    Install the display server: 
+        sudo pacman -S xorg 
+        ...
+        
+    Making a pacman Hook so we can save the boot directory after kernel update:
+        sudo pacman -S rsync
+        sudo mkdir /etc/pacman.d/hooks
+        sudo nvim /etc/pacman.d/hooks/50-bootback.hook ->
+            [Trigger]
+            operation= Upgrade
+            operation= Install
+            operation= Remove
+            type= Path
+            target= boot/*
+            
+            [Action]
+            Depends= rsync
+            Descripton = backing up /boot...
+            When = pretransaction
+            Exec= /usr/bin/rsync -a --delete /boot /.bootbackup
+ 
+ <<EOF>><sfikas>
+ 
