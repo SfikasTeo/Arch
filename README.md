@@ -106,8 +106,8 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 		* Set root  password: `passwd`
 		* Install **minimal Packages** :
 		```
-		pacman -S base-devel linux-headers networkmanager  \
-			wpa_supplicant btrfs-progs fish git dialog
+		pacman -S base-devel linux-headers networkmanager 	\
+			wpa_supplicant btrfs-progs fish git dialog	\
 		```
 		* Set up the initramfs :
 			* **Update** `/etc/mkinitcpio.conf` with `MODULES=(btrfs)` and remove `HOOKS=( fsck )`
@@ -140,9 +140,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 ## Install **Basic Packages** :
 ```
 pacman -S inetutils lm_sensors xdg-utils man-pages man-db 	\
-openssh reflector dosfstools ntfs-3g parted ttf-fira-code  	\
-
-systemctl enable sshd
+openssh reflector dosfstools ntfs-3g parted 		 	\
 ```
 ## Configuring the Desktop :
 * #### Configuring [AUR helper](https://wiki.archlinux.org/title/AUR_helpers) :
@@ -168,7 +166,7 @@ makepkg -si
 	The **startx wrapper** uses the `~/.xinitrc` configuration file. The running configs are located at the [**dots**](https://github.com/SfikasTeo/Arch/tree/main/dots) folder.  
 	**Dont forget that the sourced configuration files must be executable**.
 	* In order to set the desired resolution, use `xrandr -s <width x height>` at **startup** or look into [xorg.conf](https://wiki.archlinux.org/title/Multihead#Extended_Screen_using_XRandR_and_an_xorg.conf_file)
-	* Setting up **[keyboard layouts](https://wiki.archlinux.org/title/Xorg/Keyboard_configuration)**:
+	* Setting up **[keyboard layouts](https://wiki.archlinux.org/title/Xorg/Keyboard_configuration)** :
 		* Using `setxkbmap -layout us,gr -option win_space_toggle` sets the layouts for the current X session.  
 		This can be made **pseudo-permanent** by including this command at `~/.xinitrc`
 		* Using **X configuration files** at `/etc/X11/xorg.conf.d/00-keyboard.conf` as follows:
@@ -180,18 +178,20 @@ makepkg -si
         	        Option "XkbOptions" "grp:win_space_toggle"
 		EndSection
 		```
-	* 
-
-		
-	
+	* Setting up default **[Cursor](https://wiki.archlinux.org/title/Cursor_themes)** :
+		* Find installed themes : `find /usr/share/icons ~/.local/share/icons -type d -name "cursors"`
+		* For GTK-3 applications edit `~/.config/gtk-3.0/settings.ini`
+		* Generally configure the cursor theme through the **XDG** default icon index [configuration files](https://wiki.archlinux.org/title/Cursor_themes#XDG_specification)   
+		( If this does not work, the use of [Xresources](https://wiki.archlinux.org/title/Cursor_themes#X_resources) may be worth looking into. ) 
+			* System wide : `/usr/share/icons/default/index.theme`     
+			* User specific : `~/.icons/default/index.theme`  
+		* Lastly including `xsetroot -cursor_name pirate` int the **xinitrc** file should provide a fast and competent **alternative**.
 		
 
 * #### Install packages for **Desktop use** :
 ```
-pacman -S flameshot kitty dragon  bluez bluez-utils 	\
+pacman -S flameshot xclip kitty bluez bluez-utils \
 blueman network-manager-applet
-
-systemctl enable bluetooth
 ```
 
 ## To Do
