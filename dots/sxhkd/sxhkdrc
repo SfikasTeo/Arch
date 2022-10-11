@@ -29,7 +29,7 @@ XF86AudioMicMute
 ##---------- Bspwm ----------##
 
 # close and kill
-super + {c,q}
+super + {q,c}
 	bspc node -{c,k}
 
 # kill window
@@ -37,8 +37,8 @@ super + Escape
     xkill
 
 # Quit/Restart bspwm or sxhkd
-ctrl + alt + {q,r,Escape}
-	bspc {quit,wm -r,pkill -USR1 -x sxhkd}
+ctrl + alt + q
+	bspc quit
 	
 # Split horizontal, vertical or cancel
 super + {h,v,u}
@@ -50,11 +50,11 @@ super + {a,s}
 
 # Fullscreen or Monocle
 super + f
-    bspc node -t "~"fullscreen
+	bspc node -t "~"fullscreen
  
 # Toggle beetwen floating & tiled
 ctrl + space
-    bspc node -t "~"{floating,tiled}
+	bspc node -t "~"{floating,tiled}
 
 # Send the window to another edge of the screen
 super + ctrl + {Left,Down,Up,Right}
