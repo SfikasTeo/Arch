@@ -186,6 +186,7 @@ makepkg -si
 			* System wide : `/usr/share/icons/default/index.theme`     
 			* User specific : `~/.icons/default/index.theme`  
 		* Lastly including `xsetroot -cursor_name pirate` int the **xinitrc** file should provide a fast and competent **alternative**.
+	* Setting up [Mice](https://wiki.archlinux.org/title/Mouse_buttons) with more than 3 buttons, under Xserver :
 		
 
 * #### Install packages for **Desktop use** :
@@ -200,6 +201,11 @@ blueman network-manager-applet
 * Automation script for steps under installation guide.
 * Performance Improvements for desktop use: pacman - booting etc..
 * Implement some [General Recommendations](https://wiki.archlinux.org/title/General_recommendations)
+* LXQL intergration
+* Setting up fonts ( Xresources )
+* Mouse ( Xbind )
+* Rofi
+ 
 
 	
 				
