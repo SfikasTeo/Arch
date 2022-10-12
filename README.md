@@ -13,10 +13,13 @@
 			<li><a href='#unmount-the-arch-partition-umount--r-mnt-and-reboot'>Unmount the Partition</a></li>
 		</ul>
 		<li><a href='#install-basic-packages-'>Basic Packages</a></li>
-		<li><a href='#configuring-the-desktop-'></a>Creating the Desktop</li>
-    		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
+		<li><a href='#configuring-the-desktop-'>Configuring the Desktop</a></li>
+    		<ul>
+			<li><a href='#configuring-aur-helper-'>Aur Helper</a></li>
+			<li><a href='#setting-up-video-drivers-'>Video Drivers</a></li>
+			<li><a href='#configuring-xserver-and-bspwm-'>Xserver & Bspwm</a></li>
+			<li><a href='#'></a></li>
+		</ul>
 		<li><a href='#'></a></li>
   	</ol>
 </details>
@@ -159,14 +162,15 @@ makepkg -si
 	* [AMD](https://wiki.archlinux.org/title/AMDGPU) : `pacman -S xf86-video-amdgpu`
 
 * #### Configuring [Xserver](https://wiki.archlinux.org/title/Category:X_server) and [BSPWM](https://wiki.archlinux.org/title/Bspwm) :
-	* Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit xorg-xrandr bspwm sxhkd picom polybar feh`
+	* #### Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit xorg-xrandr bspwm sxhkd picom polybar rofi feh`
 	* Install **Audio** functionality : `pacman -S alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth`
-	* The **lack** of Display Manager is complemented by the **xorg-xinit** package as means of initializing the Xserver.  
+	* Install **Bluetooth** functionality : `pacman -S bluez bluez-utils blueman`  
+	* #### The **lack** of Display Manager is complemented by the **xorg-xinit** package as means of initializing the Xserver.  
 	After configurating the system, the `startx` command **starts** the X environment and the Window manager of choise.  
 	The **startx wrapper** uses the `~/.xinitrc` configuration file. The running configs are located at the [**dots**](https://github.com/SfikasTeo/Arch/tree/main/dots) folder.  
 	**Dont forget that the sourced configuration files must be executable**.
-	* In order to set the desired resolution, use `xrandr -s <width x height>` at **startup** or look into [xorg.conf](https://wiki.archlinux.org/title/Multihead#Extended_Screen_using_XRandR_and_an_xorg.conf_file)
-	* Setting up **[keyboard layouts](https://wiki.archlinux.org/title/Xorg/Keyboard_configuration)** :
+	* #### In order to set the desired resolution, use `xrandr -s <width x height>` at **startup** or look into [xorg.conf](https://wiki.archlinux.org/title/Multihead#Extended_Screen_using_XRandR_and_an_xorg.conf_file)
+	* #### Setting up **[keyboard layouts](https://wiki.archlinux.org/title/Xorg/Keyboard_configuration)** :
 		* Using `setxkbmap -layout us,gr -option win_space_toggle` sets the layouts for the current X session.  
 		This can be made **pseudo-permanent** by including this command at `~/.xinitrc`
 		* Using **X configuration files** at `/etc/X11/xorg.conf.d/00-keyboard.conf` as follows:
@@ -178,7 +182,7 @@ makepkg -si
         	        Option "XkbOptions" "grp:win_space_toggle"
 		EndSection
 		```
-	* Setting up default **[Cursor](https://wiki.archlinux.org/title/Cursor_themes)** :
+	* #### Setting up default **[Cursor](https://wiki.archlinux.org/title/Cursor_themes)** :
 		* Find installed themes : `find /usr/share/icons ~/.local/share/icons -type d -name "cursors"`
 		* For GTK-3 applications edit `~/.config/gtk-3.0/settings.ini`
 		* Generally configure the cursor theme through the **XDG** default icon index [configuration files](https://wiki.archlinux.org/title/Cursor_themes#XDG_specification)   
@@ -186,13 +190,12 @@ makepkg -si
 			* System wide : `/usr/share/icons/default/index.theme`     
 			* User specific : `~/.icons/default/index.theme`  
 		* Lastly including `xsetroot -cursor_name pirate` int the **xinitrc** file should provide a fast and competent **alternative**.
-	* Setting up [Mice](https://wiki.archlinux.org/title/Mouse_buttons) with more than 3 buttons, under Xserver :
+	* #### Setting up [Mice](https://wiki.archlinux.org/title/Mouse_buttons) under Xserver :
 		
 
 * #### Install packages for **Desktop use** :
 ```
-pacman -S flameshot xclip kitty bluez bluez-utils \
-blueman network-manager-applet
+pacman -S flameshot xclip kitty network-manager-applet
 ```
 
 ## To Do
