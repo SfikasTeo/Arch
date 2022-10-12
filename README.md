@@ -167,10 +167,12 @@ makepkg -si
 	* [Nvidia](https://wiki.archlinux.org/title/NVIDIA) / [Nouveau](https://wiki.archlinux.org/title/Nouveau)
 	* [AMD](https://wiki.archlinux.org/title/AMDGPU) : `pacman -S xf86-video-amdgpu`
 
-* #### Configuring [Xserver](https://wiki.archlinux.org/title/Category:X_server) and [BSPWM](https://wiki.archlinux.org/title/Bspwm) :
-	* #### Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit xorg-xrandr bspwm sxhkd picom polybar rofi feh`
+* #### Configuring [Xserver](https://wiki.archlinux.org/title/Category:X_server) and [BSPWM](https://wiki.archlinux.org/title/Bspwm) :   
+	##### Basic Functionality :	
+	* Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit xclip xorg-xrandr bspwm sxhkd picom polybar`
 	* Install **Audio** functionality : `pacman -S alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth`
 	* Install **Bluetooth** functionality : `pacman -S bluez bluez-utils blueman`  
+	* Install **Desktop** packages: `paru -S brave-bin btop bat rofi kitty flameshot`
 	* The **lack** of Display Manager is complemented by the **xorg-xinit** package as means of initializing the Xserver.  
 	After configurating the system, the `startx` command **starts** the X environment and the Window manager of choise.  
 	The **startx wrapper** uses the `~/.xinitrc` configuration file. The running configs are located at the [**dots**](https://github.com/SfikasTeo/Arch/tree/main/dots) folder.  
@@ -197,12 +199,6 @@ makepkg -si
 			* User specific : `~/.icons/default/index.theme`  
 		* Lastly including `xsetroot -cursor_name pirate` int the **xinitrc** file should provide a fast and competent **alternative**.
 	* ##### Setting up [Mice](https://wiki.archlinux.org/title/Mouse_buttons) under Xserver :
-		
-
-* #### Install packages for **Desktop use** :
-```
-pacman -S flameshot xclip kitty network-manager-applet
-```
 
 ## To Do
 * [Power management](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) Add swap space, if needed and enable [hybernation](https://wiki.archlinux.org/title/systemd-boot#Support_hibernation) throught systemd.
