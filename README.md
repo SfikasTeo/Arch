@@ -20,12 +20,12 @@
 			<li><a href='#configuring-xserver-and-bspwm-'>Xserver & Bspwm</a></li>
 			<ul>
 				<li><a href='#basic-functionality-'>Basic Functionality</a></li>
-				<li><a href='#setting-up-keyboard-layouts-'></a>Keyboard Layouts</li>
-				<li><a href='#setting-up-default-cursor-'></a>Cursor Settings</li>
-				<li><a href='#setting-up-mouse-under-xserver-'></a>Mouse Settings</li>
+				<li><a href='#setting-up-keyboard-layouts-'>Keyboard Layouts</a></li>
+				<li><a href='#setting-up-default-cursor-'>Cursor Settings</a></li>
+				<li><a href='#setting-up-mouse-under-xserver-'>Mouse Settings</a></li>
 			</ul>
 		</ul>
-		<li><a href='#to-do'></a>Work In Process</li>
+		<li><a href='#to-do'>Work In Process</a></li>
   	</ul>
 </details>
 
