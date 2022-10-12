@@ -1,7 +1,7 @@
 <!-- TABLE OF CONTENTS -->
 <details>
  	<summary>Table of Contents</summary>
-  	<ol>
+  	<ul>
     		<li><a href='#arch-'>Arch</a></li>
 		<li><a href='#starting-up-the-main-resources-that-will-be-of-use-for-the-installation-guide'>Documentation</a></li>
 		<li><a href='#installation-proccess'>Installation</a></li>
@@ -19,15 +19,14 @@
 			<li><a href='#setting-up-video-drivers-'>Video Drivers</a></li>
 			<li><a href='#configuring-xserver-and-bspwm-'>Xserver & Bspwm</a></li>
 			<ul>
-				<li><a href='#'></a></li>
-				<li><a href='#'></a></li>
-				<li><a href='#'></a></li>
+				<li><a href='#basic-functionality-'>Basic Functionality</a></li>
+				<li><a href='#setting-up-keyboard-layouts-'></a>Keyboard Layouts</li>
+				<li><a href='#setting-up-default-cursor-'></a>Cursor Settings</li>
+				<li><a href='#setting-up-mouse-under-xserver-'></a>Mouse Settings</li>
 			</ul>
-			<li><a href='#'></a></li>
 		</ul>
-		<li><a href='#'></a></li>
-		<li><a href='#'></a></li>
-  	</ol>
+		<li><a href='#to-do'></a>Work In Process</li>
+  	</ul>
 </details>
 
 # [Arch](https://wiki.archlinux.org/title/Arch_Linux) [<img src="https://github.com/SfikasTeo/Arch/blob/main/Arch_Logo.png" width="220" align="right" alt="Arch">](https://wiki.archlinux.org/)
@@ -198,7 +197,7 @@ makepkg -si
 			* System wide : `/usr/share/icons/default/index.theme`     
 			* User specific : `~/.icons/default/index.theme`  
 		* Lastly including `xsetroot -cursor_name pirate` int the **xinitrc** file should provide a fast and competent **alternative**.
-	* ##### Setting up [Mice](https://wiki.archlinux.org/title/Mouse_buttons) under Xserver :
+	* ##### Setting up [Mouse](https://wiki.archlinux.org/title/Mouse_buttons) under Xserver :
 
 ## To Do
 * [Power management](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) Add swap space, if needed and enable [hybernation](https://wiki.archlinux.org/title/systemd-boot#Support_hibernation) throught systemd.
