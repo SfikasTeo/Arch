@@ -2,10 +2,13 @@
 
 ## Make the rc files executable
 chmod +x ./bspwm/bspwmrc
+chmod +x ./polybar/launch.sh
+
 
 ## Remove previous configs
 rm -rf ~/.config/sxhkd/
 rm -rf ~/.config/picom/
+rm -rf ~/.config/polybar/
 rm -rf ~/.config/kitty/
 rm -rf ~/.config/bspwm/
 rm -rf ~/.config/fish/
@@ -15,5 +18,6 @@ cp -r ./bspwm/ ~/.config/
 cp -r ./kitty/ ~/.config/
 cp -r ./picom/ ~/.config/
 cp -r ./sxhkd/ ~/.config/
+cp -r ./polybar ~/.config/
 cp -r ./fish/  ~/.config/
 cp ./X11/.xinitrc ~/
