@@ -4,6 +4,9 @@
 chmod +x ./bspwm/bspwmrc
 chmod +x ./polybar/launch.sh
 
+## Add Wallpaper to ~/Pictures
+cp ../misc/wallpaper.jpg ~/Pictures
+
 ## Remove previous configs
 rm -rf ~/.config/sxhkd/
 rm -rf ~/.config/picom/
