@@ -4,7 +4,6 @@
 chmod +x ./bspwm/bspwmrc
 chmod +x ./polybar/launch.sh
 
-
 ## Remove previous configs
 rm -rf ~/.config/sxhkd/
 rm -rf ~/.config/picom/
