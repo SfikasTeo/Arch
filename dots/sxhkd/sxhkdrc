@@ -1,14 +1,20 @@
-##---------- Keybindings for bspwm ----------##
+##---------- Keybindings for applications ----------##
 
-# Terminal (kitty)
+# Terminal ( Kitty )
 super + t
 	kitty
+
+# Browser ( Brave )
 super + b
 	brave
 
+# Screenshot ( Flamehsot )
+super + shift + s
+	flameshot gui
+
 ##---------- Rofi Launcher & Menus ----------##
 
-##---------- Applications ----------##
+
 
 ##---------- System Keys ----------##
 
