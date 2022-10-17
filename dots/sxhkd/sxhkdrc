@@ -77,8 +77,10 @@ super + alt + {Left,Down,Up,Right}
 	bspc node -s {west,south,north,east}
 
 # Switch workspace relatively
-super + {_,shift + }{Left,Right}
-	bspc {desktop -f,node -d}{prev.local,next.local}
+super + {Left,Right}
+	bspc desktop -f {prev.local,next.local}
+super + shift + {Left, Right}
+	bspc node -d {prev.local,next.local}
 	
 # Focus or Send to the given desktop
 super + {_,shift + }{1-9,0}
