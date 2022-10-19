@@ -1,7 +1,7 @@
 function fish_right_prompt
     set -l cmd_status $status
     if test $cmd_status -ne 0
-        echo -n (set_color FFBF00)"✘ $cmd_status"
+        echo -n (set_color e77670)"✘ $cmd_status"
     end
 
     if not command -sq git
@@ -116,9 +116,9 @@ function fish_right_prompt
 
     if test -n "$branch"
         if test $branch_detached -ne 0
-            set_color e77670
-        else
             set_color 7588b3
+        else
+            set_color e77670
         end
         echo -n " $branch"
     end
