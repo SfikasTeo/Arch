@@ -171,7 +171,7 @@ makepkg -si
 	* Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit xclip xorg-xrandr bspwm sxhkd picom polybar`
 	* Install **Audio** functionality : `pacman -S alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth`
 	* Install **Bluetooth** functionality : `pacman -S bluez bluez-utils blueman`  
-	* Install **Desktop** packages: `paru -S brave-bin btop bat rofi kitty flameshot ttf-fira-code fontconfig`
+	* Install **Desktop** packages: `paru -S brave-bin btop bat rofi kitty flameshot ttf-fira-code ttf-font-awesome fontconfig`
 	* The **lack** of Display Manager is complemented by the **xorg-xinit** package as means of initializing the Xserver.  
 	After configurating the system, the `startx` command **starts** the X environment and the Window manager of choise.  
 	The **startx wrapper** uses the `~/.xinitrc` configuration file. The running configs are located at the [**dots**](https://github.com/SfikasTeo/Arch/tree/main/dots) folder.  
