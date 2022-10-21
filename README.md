@@ -170,7 +170,7 @@ makepkg -si
 	##### Basic Functionality :	
 	* Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit xclip xorg-xrandr bspwm sxhkd picom polybar`
 	* Install **Audio** functionality : `pacman -S alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth`
-	* Install **Bluetooth** functionality : `pacman -S bluez bluez-utils blueman`  
+	* Install **Bluetooth** functionality : `pacman -S bluez bluez-utils`  
 	* Install **Desktop** packages: `paru -S brave-bin btop bat rofi kitty flameshot ttf-fira-code ttf-font-awesome fontconfig`
 	* The **lack** of Display Manager is complemented by the **xorg-xinit** package as means of initializing the Xserver.  
 	After configurating the system, the `startx` command **starts** the X environment and the Window manager of choise.  
