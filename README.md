@@ -198,6 +198,12 @@ makepkg -si
 			* User specific : `~/.icons/default/index.theme`  
 		* Lastly including `xsetroot -cursor_name pirate` int the **xinitrc** file should provide a fast and competent **alternative**.
 	* ##### Setting up [Mouse](https://wiki.archlinux.org/title/Mouse_buttons) under Xserver :
+	* ##### Setting up **Default Fonts**:
+		* The use of `setfont <name>` command is adviced to change **terminal fonts**.  
+		Font names can be found using `ls /usr/share/kbd/consolefonts/` command.
+		* In a graphical environment most applications use the [**fontconfig**](https://wiki.archlinux.org/title/Font_configuration) package.  
+		The **default** font configuration can be determined either on system or on user level using ``
+		 
 
 ## To Do
 * [Power management](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) Add swap space, if needed and enable [hybernation](https://wiki.archlinux.org/title/systemd-boot#Support_hibernation) throught systemd.
