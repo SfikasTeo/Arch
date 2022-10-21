@@ -95,8 +95,8 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
  	* Generate and edit **fstab** : `genfstab -L /mnt >> /mnt/etc/fstab` && `cat /mnt/etc/fstab`
  	* Change root into the new system : `arch-chroot /mnt`
  		* Create symlink for timezone : `ln -sf /usr/share/zoneinfo/Europe/Athens /etc/localetime`
- 		* Synchronize hardware and system clock, create `/etc/adjtime` : `hwclock --systohc --localtime`
- 			* [Troubleshooting](https://wiki.archlinux.org/title/System_time#Troubleshooting): `ntpd -qg`
+ 		* Synchronize hardware and system clock, create `/etc/adjtime` : `hwclock --systohc`
+ 			* [Troubleshooting](https://wiki.archlinux.org/title/System_time#Troubleshooting): `timedatectl set-timezone Europe/Athens` or `ntpd -qg` 
  		* Edit `/etc/locale.gen` and **uncomment** `en_US.UTF-8 UTF-8`
 		* Create the [locale](https://wiki.archlinux.org/title/Locale): `locale-gen` and `echo "LANG=en_US.UTF-8" >> /etc/locale.conf`
  		* If keyboard layout was changed edit `/etc/vconsole.conf`
@@ -206,9 +206,8 @@ makepkg -si
 * Performance Improvements for desktop use: pacman - booting etc..
 * Implement some [General Recommendations](https://wiki.archlinux.org/title/General_recommendations)
 * LXQT intergration
-* Setting up fonts ( Xresources )
-* Mouse ( Xbind )
-* Rofi
+* Setting up default system fonts ( Xresources ) and Mouse ( Xbind )
+
  
 
 	
