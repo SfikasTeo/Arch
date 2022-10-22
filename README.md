@@ -196,8 +196,8 @@ makepkg -si
 		( If this does not work, the use of [Xresources](https://wiki.archlinux.org/title/Cursor_themes#X_resources) may be worth looking into. ) 
 			* System wide : `/usr/share/icons/default/index.theme`     
 			* User specific : `~/.icons/default/index.theme`  
-		* Lastly including `xsetroot -cursor_name pirate` int the **xinitrc** file should provide a fast and competent **alternative**.
-	* ##### Setting up [Mouse](https://wiki.archlinux.org/title/Mouse_buttons) under Xserver :
+		* Lastly including `xsetroot -cursor_name pirate` in the **xinitrc** file should provide a fast and competent **alternative**.
+	* ##### Configuring [Mouse](https://wiki.archlinux.org/title/Mouse_buttons) controls :
 	* ##### Setting up the **Default Fonts**:
 		* The use of `setfont <name>` command is adviced to change **terminal fonts**.  
 		Font names can be found using the `ls /usr/share/kbd/consolefonts/` command.
