@@ -192,14 +192,12 @@ makepkg -si
 	* ##### Setting up default **[Cursor](https://wiki.archlinux.org/title/Cursor_themes)** :
 		* Find installed themes : `find /usr/share/icons ~/.local/share/icons -type d -name "cursors"`
 		* For GTK-3 applications edit `~/.config/gtk-3.0/settings.ini`
-		* Generally configure the cursor theme through the **XDG** default icon index [configuration files](https://wiki.archlinux.org/title/Cursor_themes#XDG_specification)   
-		( If this does not work, the use of [Xresources](https://wiki.archlinux.org/title/Cursor_themes#X_resources) may be worth looking into. ) 
-			* System wide : `/usr/share/icons/default/index.theme`     
-			* User specific : `~/.icons/default/index.theme`  
-		* Lastly including `xsetroot -cursor_name pirate` in the **xinitrc** file should provide a fast and competent **alternative**.
+		* Generally configure the cursor theme through [**Xresources**](https://wiki.archlinux.org/title/Cursor_themes#X_resources)
+		* Lastly including `xsetroot -cursor_name { left_ptr or pirate }` in the **xinitrc** file should provide a fast and competent **alternative**.
 	* ##### Configuring [Mouse](https://wiki.archlinux.org/title/Mouse_buttons) controls :
 	* ##### Setting up the **Default Fonts**:
-		* The use of `setfont <name>` command is adviced to change **terminal fonts**.  
+		* **setfont command** :  
+		The use of `setfont <name>` command is adviced to change **terminal fonts** and mainly refers to TTY.  
 		Font names can be found using the `ls /usr/share/kbd/consolefonts/` command.
 		* In a **graphical environment** most applications use the [**fontconfig**](https://wiki.archlinux.org/title/Font_configuration) package.  
 		The **default** font configuration can be determined either on system or on [user level](https://wiki.archlinux.org/title/Font_configuration#Fontconfig_configuration) using  
@@ -224,7 +222,6 @@ makepkg -si
 * Automation script for steps under installation guide.
 * Performance Improvements for desktop use: pacman - booting etc..
 * Implement some [General Recommendations](https://wiki.archlinux.org/title/General_recommendations)
-* LXQT intergration
 * Setting up default system fonts ( Xresources ) and Mouse ( Xbind )
 
  
