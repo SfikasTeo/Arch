@@ -198,12 +198,23 @@ makepkg -si
 			* User specific : `~/.icons/default/index.theme`  
 		* Lastly including `xsetroot -cursor_name pirate` int the **xinitrc** file should provide a fast and competent **alternative**.
 	* ##### Setting up [Mouse](https://wiki.archlinux.org/title/Mouse_buttons) under Xserver :
-	* ##### Setting up **Default Fonts**:
+	* ##### Setting up the **Default Fonts**:
 		* The use of `setfont <name>` command is adviced to change **terminal fonts**.  
 		Font names can be found using the `ls /usr/share/kbd/consolefonts/` command.
-		* In a graphical environment most applications use the [**fontconfig**](https://wiki.archlinux.org/title/Font_configuration) package.  
+		* In a **graphical environment** most applications use the [**fontconfig**](https://wiki.archlinux.org/title/Font_configuration) package.  
 		The **default** font configuration can be determined either on system or on [user level](https://wiki.archlinux.org/title/Font_configuration#Fontconfig_configuration) using  
-		the `/etc/fonts/local.conf` and `~/.config/fontconfig/fonts.conf` configuration files respectively.  
+		the `/etc/fonts/local.conf` and `~/.config/fontconfig/fonts.conf` configuration files respectively. 
+		After the installation of `fontconfig` the commands `fc-list` and `fc-match <Font type>` can be used to determine **installed fonts**, and the **fonts in use** respecively.  
+		In order for the configuration files to take effect, you must create a symbolic link to the `/etc/fonts/conf.d` directory with either
+		`50-user.conf` or `51-local.conf` from the `usr/share/fontconfig/conf.avail/` directory.
+		```
+		$ cd /etc/fonts/conf.d
+		# ln -s /usr/share/fontconfig/conf.avail/{ 50-user.conf or 51-local.conf }
+		
+		nvim { ~/.config/fontconfig/fonts.conf or etc/fonts/local.conf }
+		```
+		For application that do not use the fontconfig package, Use of Xresources is advised.
+		
 		
 		 
 
