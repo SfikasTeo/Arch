@@ -11,6 +11,11 @@ super + b
 # Screenshot ( Flamehsot )
 super + shift + s
 	flameshot gui
+	
+# Code Editor ( VsCode )
+super + shift + c
+	code
+	
 
 ##---------- Rofi Launcher & Menus ----------##
 
