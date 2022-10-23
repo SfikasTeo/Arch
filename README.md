@@ -214,17 +214,10 @@ makepkg -si
 		GTK applications function using **Themes**. The default Theme for GTK-{3,4} is **Adwaita**.   
 		Generally for GTK-2 the default theme is **Raleigh**, but Arch has a custom configuration file at
 		`/usr/share/gtk-2.0/gtkrc` which sets the default theme to Adwaita.  
-		Most **Themes** can be found in the AUR and installed in the `~/.local/share/themes/` directory.    
 		**Manual** Configuration of GTK :   
 		*  **GTK-2** : User specific: `~/.gtkrc-2.0` Or system wide: `/etc/gtk-2.0/gtkrc`
 		*  **GTK-3** : User specific: `/.config/gtk-3.0/settings.ini` Or system wide: `/etc/gtk-3.0/settings.ini`
-		
-		
-			
-		
-		
-		 
-
+	
 ## To Do
 * [Power management](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) Add swap space, if needed and enable [hybernation](https://wiki.archlinux.org/title/systemd-boot#Support_hibernation) throught systemd.
 * Guide for Nvidia. AMD or Intel GPU.
