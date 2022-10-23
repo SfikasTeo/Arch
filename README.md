@@ -207,14 +207,9 @@ makepkg -si
 		In order for the configuration files to take effect, you must create a symbolic link to the `/etc/fonts/conf.d` directory with either
 		`50-user.conf` or `51-local.conf` from the `usr/share/fontconfig/conf.avail/` directory.  
 		Alternatively you can create configuration files inside the `etc/fonts/conf.d` directory.  
-		```
-		$ cd /etc/fonts/conf.d
-		# ln -s /usr/share/fontconfig/conf.avail/{ 50-user.conf or 51-local.conf }
-		
-		nvim { ~/.config/fontconfig/fonts.conf or etc/fonts/local.conf }
-		```
-		* **[Gtk](https://wiki.archlinux.org/title/GTK#Configuration) Applications** :  
+		* **[Gtk](https://wiki.archlinux.org/title/GTK#Configuration) Applications** :   
 		All GTK applications need to be configured with the coresponding configuration settings based on the GTK version in use.
+		
 	* ##### Configuring [GTK](https://wiki.archlinux.org/title/GTK#Themes) :
 		GTK applications function using **Themes**. The default Theme for GTK-{3,4} is **Adwaita**.   
 		Generally for GTK-2 the default theme is **Raleigh**, but Arch has a custom configuration file at
