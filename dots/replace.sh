@@ -14,6 +14,7 @@ rm -rf ~/.config/polybar/
 rm -rf ~/.config/kitty/
 rm -rf ~/.config/bspwm/
 rm -rf ~/.config/fish/
+rm -rf ~/.config/gtk-3.0/
 
 ## Place files at the filesystem
 cp -r ./bspwm/ ~/.config/
@@ -22,4 +23,5 @@ cp -r ./picom/ ~/.config/
 cp -r ./sxhkd/ ~/.config/
 cp -r ./polybar ~/.config/
 cp -r ./fish/  ~/.config/
+cp -r ./gtk-3.0 ~/.config/
 cp ./X11/.xinitrc ~/
