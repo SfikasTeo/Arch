@@ -63,10 +63,15 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 		mkpart BTRFS btrfs 1gb 100%
 		set 1 esp on
 		```
+		* [Optional] Make a Swap partition the **same size** as your RAM for **Hibernation**.
 	* Format the partitions :
 	```
 	mkfs.fat -F32 -n EFI /dev/sda1
 	mkfs.btrfs -L ROOT /dev/sda2
+	
+	[Optional] mkswap -L SWAP /dev/sda3
+		    swapon /dev/sda3		   
+			
 	```
 	* Create the Btrfs subvolumes :
 	```
@@ -118,7 +123,8 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 			wpa_supplicant btrfs-progs fish git dialog	\
 		```
 		* Set up the initramfs :
-			* **Update** `/etc/mkinitcpio.conf` with `MODULES=(btrfs)` and remove `HOOKS=( fsck )`
+			* **Update** `/etc/mkinitcpio.conf` with `MODULES=(btrfs)` and remove `HOOKS=( ..fsck )`
+			* [Optional] For Hibernation add the **resume** hook after udev `HOOKS=( ..udev ..resume )`
 			* Recreate initramfs with `mkinitcpio -p linux`
 		* Create **user**: `useradd -mG users,wheel,audio,video -s /bin/fish sfikas` and `passwd sfikas`
 		* Edit `/etc/sudoers` file: `EDITOR=nvim visudo` and **uncomment** `%wheel ALL=(ALL) ALL`
@@ -132,6 +138,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 			initrd {/amd-ucode.img or /intel-ucode.img}
 			initrd /initramfs-linux.img
 			options root=LABEL=ROOT rootflags=subvol=@ rw
+			[Optional] resume="PARTLABEL=SWAP"
 			```
 			* Set the default bootloader entry : `nvim /boot/loader/loader.conf`   
 
@@ -171,7 +178,7 @@ makepkg -si
 	* Install **Xorg** and The **Window manager** :  `pacman -S xorg xorg-xinit xclip xorg-xrandr bspwm sxhkd picom polybar`
 	* Install **Audio** functionality : `pacman -S alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth`
 	* Install **Bluetooth** functionality : `pacman -S bluez bluez-utils`  
-	* Install **Desktop** packages: `paru -S brave-bin btop bat rofi kitty flameshot ttf-fira-code ttf-font-awesome fontconfig`
+	* Install **Desktop** packages: `paru -S brave-bin btop bat rofi kitty flameshot ttf-fira-code ttf-font-awesome fontconfig mpv`
 	* The **lack** of Display Manager is complemented by the **xorg-xinit** package as means of initializing the Xserver.  
 	After configurating the system, the `startx` command **starts** the X environment and the Window manager of choise.  
 	The **startx wrapper** uses the `~/.xinitrc` configuration file. The running configs are located at the [**dots**](https://github.com/SfikasTeo/Arch/tree/main/dots) folder.  
