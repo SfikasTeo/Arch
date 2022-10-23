@@ -193,25 +193,39 @@ makepkg -si
 		* Find installed themes : `find /usr/share/icons ~/.local/share/icons -type d -name "cursors"`
 		* For GTK-3 applications edit `~/.config/gtk-3.0/settings.ini`
 		* Generally configure the cursor theme through [**Xresources**](https://wiki.archlinux.org/title/Cursor_themes#X_resources)
-		* Lastly including `xsetroot -cursor_name { left_ptr or pirate }` in the **xinitrc** file should provide a fast and competent **alternative**.
+		* Lastly include `xsetroot -cursor_name { left_ptr or pirate }` in the **xinitrc** file.
 	* ##### Configuring [Mouse](https://wiki.archlinux.org/title/Mouse_buttons) controls :
 	* ##### Setting up the **Default Fonts**:
 		* **setfont command** :  
 		The use of `setfont <name>` command is adviced to change **terminal fonts** and mainly refers to TTY.  
 		Font names can be found using the `ls /usr/share/kbd/consolefonts/` command.
-		* In a **graphical environment** most applications use the [**fontconfig**](https://wiki.archlinux.org/title/Font_configuration) package.  
-		The **default** font configuration can be determined either on system or on [user level](https://wiki.archlinux.org/title/Font_configuration#Fontconfig_configuration) using  
-		the `/etc/fonts/local.conf` and `~/.config/fontconfig/fonts.conf` configuration files respectively. 
-		After the installation of `fontconfig` the commands `fc-list` and `fc-match <Font type>` can be used to determine **installed fonts**, and the **fonts in use** respecively.  
+		* **Fontconfig package** :  
+		Some applications read the [**fontconfig**](https://wiki.archlinux.org/title/Font_configuration) configuration files to determine the default Fonts.    
+		The **default** font configuration can be determined either on system or on [user level](https://wiki.archlinux.org/title/Font_configuration#Fontconfig_configuration) using 
+		the `/etc/fonts/local.conf` and `~/.config/fontconfig/fonts.conf` configuration files respectively.   
+		After the installation of **fontconfig** the commands `fc-list` and `fc-match <Font type>` can be used to determine **installed fonts**, and the **fonts in use** respecively.    
 		In order for the configuration files to take effect, you must create a symbolic link to the `/etc/fonts/conf.d` directory with either
-		`50-user.conf` or `51-local.conf` from the `usr/share/fontconfig/conf.avail/` directory.
+		`50-user.conf` or `51-local.conf` from the `usr/share/fontconfig/conf.avail/` directory.  
+		Alternatively you can create configuration files inside the `etc/fonts/conf.d` directory.  
 		```
 		$ cd /etc/fonts/conf.d
 		# ln -s /usr/share/fontconfig/conf.avail/{ 50-user.conf or 51-local.conf }
 		
 		nvim { ~/.config/fontconfig/fonts.conf or etc/fonts/local.conf }
 		```
-		For application that do not use the fontconfig package, Use of Xresources is advised.
+		* **[Gtk](https://wiki.archlinux.org/title/GTK#Configuration) Applications** :  
+		All GTK applications need to be configured with the coresponding configuration settings based on the GTK version in use.
+	* ##### Configuring [GTK](https://wiki.archlinux.org/title/GTK#Themes) :
+		GTK applications function using **Themes**. The default Theme for GTK-{3,4} is **Adwaita**.   
+		Generally for GTK-2 the default theme is **Raleigh**, but Arch has a custom configuration file at
+		`/usr/share/gtk-2.0/gtkrc` which sets the default theme to Adwaita.  
+		Most **Themes** can be found in the AUR and installed in the `~/.local/share/themes/` directory.    
+		**Manual** Configuration of GTK :   
+		*  **GTK-2** : User specific: `~/.gtkrc-2.0` Or system wide: `/etc/gtk-2.0/gtkrc`
+		*  **GTK-3** : User specific: `/.config/gtk-3.0/settings.ini` Or system wide: `/etc/gtk-3.0/settings.ini`
+		
+		
+			
 		
 		
 		 
