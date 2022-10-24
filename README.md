@@ -253,7 +253,7 @@ makepkg -si
 * [SSD General Settings](https://wiki.archlinux.org/title/Solid_state_drive)
 * [Performance](https://wiki.archlinux.org/title/Improving_performance)
 	* [Resizable Bar](https://wiki.archlinux.org/title/Improving_performance#Enabling_PCI_Resizable_BAR)
-	* [Turning off Mitigations](https://wiki.archlinux.org/title/Improving_performance#Turn_off_CPU_exploit_mitigations)
+	* [Turning off Mitigations](https://wiki.archlinux.org/title/Improving_performance#Turn_off_CPU_exploit_mitigations) <- Offers Performance Dont Do it. **SECURITY RISK**
 	* etc
 
  
