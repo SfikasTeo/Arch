@@ -250,7 +250,6 @@ makepkg -si
 	* [Power Management Through Systemd - Laptop Utilities](https://wiki.archlinux.org/title/Power_management#Power_management_with_systemd)
 	* [General Page About Laptops](https://wiki.archlinux.org/title/Category:Laptops)
 	* [Specific Informations About Laptops](https://wiki.archlinux.org/title/Laptop)
-	*  
 * [SSD General Settings](https://wiki.archlinux.org/title/Solid_state_drive)
 * [Performance](https://wiki.archlinux.org/title/Improving_performance)
 	* [Resizable Bar](https://wiki.archlinux.org/title/Improving_performance#Enabling_PCI_Resizable_BAR)
