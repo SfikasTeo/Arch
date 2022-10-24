@@ -63,7 +63,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 		mkpart BTRFS btrfs 1gb 100%
 		set 1 esp on
 		```
-		* [Optional] Make a Swap partition the **same size** as your RAM for **Hibernation**.
+		* [Optional] Make a Swap partition the **same size** as your RAM for **[Hibernation](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation)**.
 	* Format the partitions :
 	```
 	mkfs.fat -F32 -n EFI /dev/sda1
@@ -224,14 +224,26 @@ makepkg -si
 		**Manual** Configuration of GTK :   
 		*  **GTK-2** : User specific: `~/.gtkrc-2.0` Or system wide: `/etc/gtk-2.0/gtkrc`
 		*  **GTK-3** : User specific: `/.config/gtk-3.0/settings.ini` Or system wide: `/etc/gtk-3.0/settings.ini`
-	
+
+## Using [Pacman](https://wiki.archlinux.org/title/Pacman) :
+* Pacman Configuration `/etc/pacman.conf` : **Misc Options - Uncomment** : `ILoveCandy, Color, ParallelDownloads = 5`  
+* In order to **ignore** packages from beeing **updated**, add them in `/etc/pacman.conf` under option: `IgnorePkg= <p1> <p2>`
+* Basic pacman instructions :
+	* `pacman -Syu` : Full system update.
+	* `pacman -S or -Sw <package>` : Install package or simply download it.
+	* `pacman -U <path/to/package>` : Install a local package.
+	* `pacman -Rns <package>` : Remove package, its orphaned dependencies and default configuration backup files.
+	* `pacman -Ss or -Qs` : Search for package in the repositories or locally respectively.
+	* `pacman -Si or -Qi` : Display package's detailed information.
+	* `pacman -Qdt` : List orphane packages.
+	* `pacman -Scc` : Clean aggresively pacman's cache directory.
+
+
 ## To Do
-* [Power management](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate) Add swap space, if needed and enable [hybernation](https://wiki.archlinux.org/title/systemd-boot#Support_hibernation) throught systemd.
 * Guide for Nvidia. AMD or Intel GPU.
-* Automation script for steps under installation guide.
 * Performance Improvements for desktop use: pacman - booting etc..
 * Implement some [General Recommendations](https://wiki.archlinux.org/title/General_recommendations)
-* Setting up default system fonts ( Xresources ) and Mouse ( Xbind )
+
 
  
 
