@@ -14,7 +14,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
     " one dark theme
-   Plug 'joshdick/onedark.vim' 
-   Plug 'rakr/vim-one' 
-   Plug 'tyrannicaltoucan/vim-deep-space'
+"   Plug 'joshdick/onedark.vim' 
+"   Plug 'rakr/vim-one' 
+"   Plug 'tyrannicaltoucan/vim-deep-space'
 call plug#end()
