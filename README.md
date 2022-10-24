@@ -22,9 +22,12 @@
 				<li><a href='#basic-functionality-'>Basic Functionality</a></li>
 				<li><a href='#setting-up-keyboard-layouts-'>Keyboard Layouts</a></li>
 				<li><a href='#setting-up-default-cursor-'>Cursor Settings</a></li>
-				<li><a href='#setting-up-mouse-under-xserver-'>Mouse Settings</a></li>
+				<li><a href='#configuring-mouse-controls-'>Mouse Settings</a></li>
+				<li><a href='#setting-up-the-default-fonts-'>Default Fonts</a></li>
+				<li><a href='#configuring-gtk-'>Configure Gtk</a></li>
 			</ul>
 		</ul>
+		<li><a href='#using-pacman-'>Pacman Cheetsheet</a></li>
 		<li><a href='#to-do'>Work In Process</a></li>
   	</ul>
 </details>
@@ -205,7 +208,7 @@ makepkg -si
 		* Generally configure the cursor theme through [**Xresources**](https://wiki.archlinux.org/title/Cursor_themes#X_resources)
 		* Lastly include `xsetroot -cursor_name { left_ptr or pirate }` in the **xinitrc** file.
 	* ##### Configuring [Mouse](https://wiki.archlinux.org/title/Mouse_buttons) controls :
-	* ##### Setting up the **Default Fonts**:
+	* ##### Setting up the **Default Fonts** :
 		* **setfont command** :  
 		The use of `setfont <name>` command is adviced to change **terminal fonts** and mainly refers to TTY.  
 		Font names can be found using the `ls /usr/share/kbd/consolefonts/` command.
