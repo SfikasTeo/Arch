@@ -244,8 +244,8 @@ makepkg -si
 
 ## To Do
 * Guide for Nvidia. AMD or Intel GPU.
-* Performance Improvements for desktop use: pacman - booting etc..
-* Implement some [General Recommendations](https://wiki.archlinux.org/title/General_recommendations)
+* Configure Mouse.
+* [General Recommendations](https://wiki.archlinux.org/title/General_recommendations)
 * [Power Management](https://wiki.archlinux.org/title/Category:Power_management)
 	* [Power Management Through Systemd - Laptop Utilities](https://wiki.archlinux.org/title/Power_management#Power_management_with_systemd)
 	* [General Page About Laptops](https://wiki.archlinux.org/title/Category:Laptops)
@@ -253,7 +253,8 @@ makepkg -si
 * [SSD General Settings](https://wiki.archlinux.org/title/Solid_state_drive)
 * [Performance](https://wiki.archlinux.org/title/Improving_performance)
 	* [Resizable Bar](https://wiki.archlinux.org/title/Improving_performance#Enabling_PCI_Resizable_BAR)
-	* Many Others
+	* [Turning off Mitigations](https://wiki.archlinux.org/title/Improving_performance#Turn_off_CPU_exploit_mitigations)
+	* etc
 
  
 
