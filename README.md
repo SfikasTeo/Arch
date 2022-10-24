@@ -30,7 +30,9 @@
 </details>
 
 # [Arch](https://wiki.archlinux.org/title/Arch_Linux) [<img src="https://github.com/SfikasTeo/Arch/blob/main/Arch_Logo.png" width="220" align="right" alt="Arch">](https://wiki.archlinux.org/)
-Arch Linux is a barebone linux distribution with a **minimal** ISO focused on the KISS and 'Do-it-yourself' principles. Striving to provide the latest software releases, the distribution is based on a **rolling release** model.  
+Arch Linux is a barebone linux distribution with a **minimal** ISO focused on the KISS and 'Do-it-yourself' principles.  
+Striving to provide the latest software releases, the distribution is based on a **rolling release** model.  
+Arch uses **[systemd](https://wiki.archlinux.org/title/Systemd#Basic_systemctl_usage)** as the init process and provides [journal](https://wiki.archlinux.org/title/Systemd/Journal) as a logging system.  
 Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html)), and the package management is based on [Pacman](https://wiki.archlinux.org/title/Pacman).  
     
 **Disclaiming**: The following guide will be customized and specific for my set-up process.  Alternating the guide to your needs is advisable. 
@@ -237,13 +239,22 @@ makepkg -si
 	* `pacman -Si or -Qi` : Display package's detailed information.
 	* `pacman -Qdt` : List orphane packages.
 	* `pacman -Scc` : Clean aggresively pacman's cache directory.
+* [Pacman Tips and Tricks](https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#) offers a deeper dive into the package manager.
 
 
 ## To Do
 * Guide for Nvidia. AMD or Intel GPU.
 * Performance Improvements for desktop use: pacman - booting etc..
 * Implement some [General Recommendations](https://wiki.archlinux.org/title/General_recommendations)
-
+* [Power Management](https://wiki.archlinux.org/title/Category:Power_management)
+	* [Power Management Through Systemd - Laptop Utilities](https://wiki.archlinux.org/title/Power_management#Power_management_with_systemd)
+	* [General Page About Laptops](https://wiki.archlinux.org/title/Category:Laptops)
+	* [Specific Informations About Laptops](https://wiki.archlinux.org/title/Laptop)
+	*  
+* [SSD General Settings](https://wiki.archlinux.org/title/Solid_state_drive)
+* [Performance](https://wiki.archlinux.org/title/Improving_performance)
+	* [Resizable Bar](https://wiki.archlinux.org/title/Improving_performance#Enabling_PCI_Resizable_BAR)
+	* Many Others
 
  
 
