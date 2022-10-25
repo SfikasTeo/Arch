@@ -1,5 +1,6 @@
 "Sourcing
 source $HOME/.config/nvim/vim-plug/plugins.vim
+source $HOME/.config/nvim/themes/onedark.vim	" colorscheme
 
 " --------------- THEME ---------------
 
@@ -10,7 +11,6 @@ source $HOME/.config/nvim/vim-plug/plugins.vim
 	set nowrap			" Long lines not wrapped
 	
 	" Current colorscheme
-	colorscheme gruvbox
   	set termguicolors
 	
 " --------------- GENERAL SETTINGS ---------------
