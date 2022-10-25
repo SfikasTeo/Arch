@@ -9,13 +9,9 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 	
-	Plug 'sheerun/vim-polyglot'   	" Better Syntax Support
-        Plug 'jiangmiao/auto-pairs' 	" Auto pairs for '(' '[' '{'
+	Plug 'jiangmiao/auto-pairs' 	" Auto pairs for '(' '[' '{'
     	Plug 'preservim/nerdcommenter'  " Easy multiline commenting tool
+	Plug 'morhetz/gruvbox'
     	" Plug 'neoclide/coc.nvim', {'branch': 'release'}     " a fast code completion engine
 	
-	" one dark theme
-	"   Plug 'joshdick/onedark.vim' 
-	"   Plug 'rakr/vim-one' 
-	"   Plug 'tyrannicaltoucan/vim-deep-space'
 call plug#end()
