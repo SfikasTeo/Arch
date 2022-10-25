@@ -1,3 +1,9 @@
+## Recap keybinds: 
+## Super: t [Terminal], b [Browser], a [node All], s [node Sticky], q [node Close], c [node Kill]
+## Super: k [xserver Kill], S [Screenshot], f [node Fullscreen], h [slip Horizontal], v [split Vertical]
+## Super: z [split undo], C [Vscode]
+
+
 ##---------- Keybindings for applications ----------##
 
 # Terminal ( Kitty )
@@ -15,7 +21,6 @@ super + shift + s
 # Code Editor ( VsCode )
 super + shift + c
 	code
-	
 
 ##---------- Rofi Launcher & Menus ----------##
 
@@ -44,7 +49,7 @@ super + {q,c}
 	bspc node -{c,k}
 
 # kill window
-super + Escape
+super + k
 	xkill
 
 # Quit/Restart bspwm or sxhkd
@@ -52,7 +57,7 @@ ctrl + alt + q
 	bspc quit
 	
 # Split horizontal, vertical or cancel
-super + {h,v,u}
+super + {h,v,z}
 	bspc node -p {east,south,cancel}
 
 # set the node flags
