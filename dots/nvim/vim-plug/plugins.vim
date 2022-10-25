@@ -11,9 +11,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     	Plug 'preservim/nerdcommenter'  " Easy multiline commenting tool
 	" Plug 'neoclide/coc.nvim', {'branch': 'release'}     " a fast code completion engine
 	
-	" one dark theme
+	" Themes
 	Plug 'joshdick/onedark.vim' 
-	Plug 'rakr/vim-one' 
-	Plug 'tyrannicaltoucan/vim-deep-space'
+	" Plug 'rakr/vim-one' 
+	" Plug 'tyrannicaltoucan/vim-deep-space'
 	
 call plug#end()
