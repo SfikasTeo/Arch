@@ -71,29 +71,30 @@ source $HOME/.config/nvim/vim-plug/plugins.vim
 	
 " --------------- KEYBINDS ---------------
 
-	" Insert mode keybindings
-		:inoremap ii <Esc>
-    		inoremap <C-c> <C-o>yy
-    		inoremap <C-x> <C-o>dd
-		inoremap <C-v> <C-o>p
-    	" Navigate during insert mode
-    		inoremap <C-h> <C-o>h
-    		inoremap <C-j> <C-o>j
-    		inoremap <C-k> <C-o>k
-    		inoremap <C-l> <C-o>l
+" Insert mode keybindings
+	:inoremap ii <Esc>
+	inoremap <C-c> <C-o>yy
+	inoremap <C-x> <C-o>dd
+	inoremap <C-v> <C-o>p
+	
+" Navigate during insert mode
+	inoremap <C-h> <C-o>h
+	inoremap <C-j> <C-o>j
+	inoremap <C-k> <C-o>k
+	inoremap <C-l> <C-o>l
    
-    	" Quit And Save from everymode
-		nnoremap <C-w> <C-o>:x
-		inoremap <C-w> <C-o>:x
-		vnoremap <C-w> <C-o>:x
+" Quit And Save from everymode
+	nnoremap <C-w> <C-o>:x
+	inoremap <C-w> <C-o>:x
+	vnoremap <C-w> <C-o>:x
    
-		nnoremap <C-q> <C-o>:q!
-		inoremap <C-q> <C-o>:q!
-		vnoremap <C-q> <C-o>:q!
+	nnoremap <C-q> <C-o>:q!
+	inoremap <C-q> <C-o>:q!
+	vnoremap <C-q> <C-o>:q!
 
-    	" Undo most recent change
-		nnoremap <C-z> <C-o>u
-		inoremap <C-z> <C-o>u
-		vnoremap <C-z> <C-o>u
+" Undo most recent change
+	nnoremap <C-z> <C-o>u
+	inoremap <C-z> <C-o>u
+	vnoremap <C-z> <C-o>u
          
 " --------------- END ---------------
