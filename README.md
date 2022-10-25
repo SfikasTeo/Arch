@@ -59,44 +59,77 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 * ##### Configuring **Partitions** and **Filesystems** :
 	* `lsblk -f` or `fdisk -l` -> List drives  
 	* `blkdiscard /dev/sda` -> Updates the drives firmware to signify that the drive is empty (**SSD** or **NVME** only).  
+	* The two most open sourced and advocated filesystems, tuned for desktop use, are [**Ext4**](https://wiki.archlinux.org/title/Ext4) and [**Btrfs**](https://wiki.archlinux.org/title/Btrfs)  
+	While the the first offers a reliable and accepably fast filesystem, the second provides a series of quality of life improvements, at the cost of some speed,
   	* [Partition Disk](https://wiki.archlinux.org/title/Installation_guide#Partition_the_disks) ( `/dev/sda` ):    
           Any supported partition utility could be used. We will default to GNU **parted** -> `parted`  
 		* Create a **gpt** partition table -> `mklabel gpt`
 		* Create the partitions :  
 		```
-		mkpart BOOT fat32 4mb 1gb  
-		mkpart BTRFS btrfs 1gb 100%
+		#Create a GPT Partition Table
+		mklabel gpt
+	
+		# Create the Boot Partition
+		mkpart BOOT fat32 4mb 1gb
 		set 1 esp on
+		
+		# [Optional] Swap Partition
+		mkpart SWAP linux-swap 1gb Xgb
+		
+		# Choose a Root Partition
+		mkpart BTRFS btrfs Xgb 100%
+		mkpart EXT4 ext4 Xgb 100%
 		```
-		* [Optional] Make a Swap partition the **same size** as your RAM for **[Hibernation](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation)**.
+		* [Optional] Make a Swap partition **at least the same size** as your RAM for **[Hibernation](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation)**.
 	* Format the partitions :
 	```
+	# Format the EFI Boot Partition
 	mkfs.fat -F32 -n EFI /dev/sda1
-	mkfs.btrfs -L ROOT /dev/sda2
 	
-	[Optional] mkswap -L SWAP /dev/sda3
-		    swapon /dev/sda3		   
-			
+	# Format the ROOT Partition
+	mkfs.btrfs -L ROOT /dev/sda3
+	mkfs.ext4 -L ROOT -m 1 /dev/sda3
+	
+	# Format and enable Swap Partition
+	mkswap -L SWAP /dev/sda2
+	swapon /dev/sda2	   
 	```
 	* Create the Btrfs subvolumes :
 	```
-	mount /dev/sda2 /mnt
+	mount /dev/sda3 /mnt
 	btrfs su cr /mnt/@
 	btrfs su vr /mnt/@home
 	umount /mnt
 	```
+	* Tune The Ext4 performance:
+	```
+	# Check all Options:
+	tune2fs -l /dev/sda3 | grep features
+	
+	tune2fs -O fast_commit /dev/sda3
+	
+	# Disabling Journal may lead to data loss
+	# in sudden shutdowns, It is not advised.
+	tune2fs -O "^has_journal" /dev/sda3
+	```
 	* Mount the Filesystems :
 	```
-	mount -o rw,ssd,noatime,space_cache=v2,discard=async,compress=zstd:1,subvol=@ /dev/sda2 /mnt
+	# Mount Btrfs
+	mount -o rw,ssd,noatime,space_cache=v2,discard=async,compress=zstd:1,subvol=@ /dev/sda3 /mnt
 	mkdir /mnt/home
-	mount -o rw,ssd,noatime,space_cache=v2,discard=async,compress=zstd:1,subvol=@home /dev/sda2 /mnt/home
+	mount -o rw,ssd,noatime,space_cache=v2,discard=async,compress=zstd:1,subvol=@home /dev/sda3 /mnt/home
+		
+	# Mount Ext4
+	mount -o rw,defaults,noatime,commit=60 /dev/sda3 /mnt
+	
+	# Mount the Boot Partition
 	mkdir /mnt/boot
 	mount /dev/sda1 /mnt/boot
 	```
 	Should you use btrfs [compression](https://www.reddit.com/r/btrfs/comments/kul2hh/btrfs_performance/) ? What about the other btrfs [mount options](https://btrfs.readthedocs.io/en/latest/btrfs-man5.html) ?
 * ##### Update the mirrorlist :
 	* Edit `/etc/pacman.d/mirrorlist` manually
-	* [Reflector](https://man.archlinux.org/man/reflector.1) : `reflector -l 20 --verbose --sort rate --save /etc/pacman.d/mirrorlist`
+	* [Reflector](https://man.archlinux.org/man/reflector.1) : `reflector -l 40 --verbose --sort rate --save /etc/pacman.d/mirrorlist`
 * ##### Install Essential packages using pacstrap :
  ```
  pacstrap -i /mnt base sudo linux linux-firmware neovim {amd-ucode or intel-ucode}
@@ -142,8 +175,11 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 			linux /vmlinuz-linux
 			initrd {/amd-ucode.img or /intel-ucode.img}
 			initrd /initramfs-linux.img
+			# Option for Btrfs
 			options root=LABEL=ROOT rootflags=subvol=@ rw
-			[Optional] resume="PARTLABEL=SWAP"
+			# Option For Ext4 And Swap
+			options root="LABEL=ROOT" rw resume="PARTLABEL=SWAP"
+			
 			```
 			* Set the default bootloader entry : `nvim /boot/loader/loader.conf`   
 
@@ -256,11 +292,5 @@ makepkg -si
 	* [Specific documentation for Laptops](https://wiki.archlinux.org/title/Laptop)
 * [SSD General Settings](https://wiki.archlinux.org/title/Solid_state_drive)
 * [Performance](https://wiki.archlinux.org/title/Improving_performance)
-	* [Resizable Bar](https://wiki.archlinux.org/title/Improving_performance#Enabling_PCI_Resizable_BAR)
-	* [Turning off Mitigations](https://wiki.archlinux.org/title/Improving_performance#Turn_off_CPU_exploit_mitigations) <- Offers Performance Dont Do it. **SECURITY RISK**
-	* etc
-
- 
-
 	
 				
