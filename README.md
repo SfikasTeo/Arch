@@ -120,7 +120,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 	mount -o rw,ssd,noatime,space_cache=v2,discard=async,compress=zstd:1,subvol=@home /dev/sda3 /mnt/home
 		
 	# Mount Ext4
-	mount -o rw,defaults,noatime,commit=60 /dev/sda3 /mnt
+	mount -o rw,noatime,commit=60 /dev/sda3 /mnt
 	
 	# Mount the Boot Partition
 	mkdir /mnt/boot
@@ -136,9 +136,9 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
  ```
  * ##### Configure The system :
  	* Generate and edit **fstab** : `genfstab -L /mnt >> /mnt/etc/fstab` && `cat /mnt/etc/fstab`
- 	* Change root into the new system : `arch-chroot /mnt`
+ 	* **Change root into the new system :** `arch-chroot /mnt`
  		* Create symlink for timezone : `ln -sf /usr/share/zoneinfo/Europe/Athens /etc/localetime`
- 		* Synchronize hardware and system clock, create `/etc/adjtime` : `hwclock --systohc`
+ 		* Synchronize hardware and system clock : `hwclock --systohc`
  			* [Troubleshooting](https://wiki.archlinux.org/title/System_time#Troubleshooting): `timedatectl set-timezone Europe/Athens` or `ntpd -qg` 
  		* Edit `/etc/locale.gen` and **uncomment** `en_US.UTF-8 UTF-8`
 		* Create the [locale](https://wiki.archlinux.org/title/Locale): `locale-gen` and `echo "LANG=en_US.UTF-8" >> /etc/locale.conf`
@@ -158,10 +158,10 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 		* Install **minimal Packages** :
 		```
 		pacman -S base-devel linux-headers networkmanager 	\
-			wpa_supplicant btrfs-progs fish git dialog	\
+			wpa_supplicant fish git dialog ( btrfs-progs )	\
 		```
 		* Set up the initramfs :
-			* **Update** `/etc/mkinitcpio.conf` with `MODULES=(btrfs)` and remove `HOOKS=( ..fsck )`
+			* **Update** `/etc/mkinitcpio.conf` with `MODULES=(btrfs)`, if Btrfs is used and remove `HOOKS=( ..fsck )`
 			* [Optional] For Hibernation add the **resume** hook after udev `HOOKS=( ..udev ..resume )`
 			* Recreate initramfs with `mkinitcpio -p linux`
 		* Create **user**: `useradd -mG users,wheel,audio,video -s /bin/fish sfikas` and `passwd sfikas`
@@ -169,7 +169,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 		* Set up **systemd-boot**
 			* **Warning**  This will work only on UEFI.
 			* Setup systemd-boot : `bootctl --path=/boot install`
-			* Create your bootloader enty : `nvim /boot/loaders/entries/arch.conf`
+			* Create your bootloader enty : `nvim /boot/loader/entries/arch.conf`
 			```
 			title Arch Linux
 			linux /vmlinuz-linux
@@ -217,7 +217,7 @@ makepkg -si
 * #### Configuring [Xserver](https://wiki.archlinux.org/title/Category:X_server) and [BSPWM](https://wiki.archlinux.org/title/Bspwm) :   
 	##### Basic Functionality :	
 	* Install **Xorg** : `pacman -S xorg xorg-xinit xclip xorg-xrandr` 
-	* Install the **Window manager** :  `pacman -S  bspwm sxhkd picom polybar kitty fontconfig`
+	* Install the **Window manager** :  `pacman -S  bspwm sxhkd picom polybar kitty fontconfig feh`
 	* Install **Audio** functionality : `pacman -S alsa-utils pulseaudio pulseaudio-alsa pulseaudio-bluetooth`
 	* Install **Bluetooth** functionality : `pacman -S bluez bluez-utils`  
 	* Install **Desktop** packages: 
