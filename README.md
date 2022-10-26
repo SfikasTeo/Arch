@@ -36,7 +36,7 @@
 Arch Linux is a barebone linux distribution with a **minimal** ISO focused on the KISS and 'Do-it-yourself' principles.  
 Striving to provide the latest software releases, the distribution is based on a **rolling release** model.  
 Arch uses **[systemd](https://wiki.archlinux.org/title/Systemd#Basic_systemctl_usage)** as the init process and provides [journal](https://wiki.archlinux.org/title/Systemd/Journal) as a logging system.  
-Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html)), and the package management is based on [Pacman](https://wiki.archlinux.org/title/Pacman).  
+Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html)), and the package management is based on [**Pacman**](https://wiki.archlinux.org/title/Pacman).  
     
 **Disclaiming**: The following guide will be customized and specific for my set-up process.  Alternating the guide to your needs is advisable. 
 
@@ -146,10 +146,10 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
  		* Edit Hostname : `echo "SF-Arch" >> /etc/hostname`
  		* Edit LocalHost : `nvim /etc/hosts`
  		```
-		#Standard host addresses					# Simpler Configuration 
-		127.0.0.1	localhost 					127.0.0.1	localhost 
-		::1		localhost ip6-localhost ip6-loopback		::1		localhost
-		ff02::1	ip6-allnodes						127.0.1.1	SF-Arch.localdomain	SF-Arch	
+		#Standard host addresses				# Simpler Configuration 
+		127.0.0.1	localhost 				127.0.0.1	localhost 
+		::1		localhost ip6-localhost ip6-loopback	::1		localhost
+		ff02::1	ip6-allnodes				127.0.1.1	SF-Arch.localdomain	SF-Arch	
 		ffo2::2	ip6-allrouters
 		#This Host Address
 		127.0.1.1	SF-Arch
