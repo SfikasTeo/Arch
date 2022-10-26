@@ -5,7 +5,7 @@ chmod +x ./bspwm/bspwmrc
 chmod +x ./polybar/launch.sh
 
 ## Configure Fontconfig
-mkdir ~/.config/fontconfig
+mkdir -p ~/.config/fontconfig
 cp ./fontconfig/fonts.conf ~/.config/fontconfig
 
 # Remove Noto Default Configurations
@@ -17,7 +17,7 @@ rm -rf /etc/fonts/conf.d/66-noto-serif.conf
 cp -r ./fontconfig/conf.d/* /etc/fonts/conf.d/
 
 ## Add Wallpaper to ~/Pictures
-mkdir ~/Pictures
+mkdir -p ~/Pictures
 cp ../misc/wallpaper.jpg ~/Pictures/
 
 ## Remove previous configs
