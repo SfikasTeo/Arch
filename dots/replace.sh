@@ -34,9 +34,10 @@ cp -r ./bspwm/ ~/.config/
 cp -r ./kitty/ ~/.config/
 cp -r ./picom/ ~/.config/
 cp -r ./sxhkd/ ~/.config/
-cp -r ./polybar ~/.config/
+cp -r ./polybar/ ~/.config/
 cp -r ./fish/  ~/.config/
-cp -r ./gtk-3.0 ~/.config/
+cp -r ./gtk-3.0/ ~/.config/
+cp -r ./nvim/   ~/.config/
 cp ./X11/.xinitrc ~/
 
 ## Add Keyboard Configuration
