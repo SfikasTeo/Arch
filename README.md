@@ -146,10 +146,10 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
  		* Edit Hostname : `echo "SF-Arch" >> /etc/hostname`
  		* Edit LocalHost : `nvim /etc/hosts`
  		```
-		#Standard host addresses
-		127.0.0.1	localhost 
-		::1		localhost ip6-localhost ip6-loopback
-		ff02::1	ip6-allnodes
+		#Standard host addresses					# Simpler Configuration 
+		127.0.0.1	localhost 					127.0.0.1	localhost 
+		::1		localhost ip6-localhost ip6-loopback		::1		localhost
+		ff02::1	ip6-allnodes						127.0.1.1	SF-Arch.localdomain	SF-Arch	
 		ffo2::2	ip6-allrouters
 		#This Host Address
 		127.0.1.1	SF-Arch
