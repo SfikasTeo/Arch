@@ -192,6 +192,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 			* Start NetworkManager Service : `systemctl enable NetworkManager`
 		* **Exit** the chroot environment: `exit`
 * ##### Unmount the arch partition `umount -R /mnt` and `reboot`
+* ##### Set up System's power behavior by editing `/etc/systemd/logind.conf` and restarting `systemd-logind` service.
 
 ## Install **Basic Packages** :
 ```
