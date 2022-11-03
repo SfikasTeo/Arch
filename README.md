@@ -49,6 +49,10 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 * [BootLoaders Comparisson](https://wiki.archlinux.org/title/Arch_boot_process#Boot_loader)
 
 ## [Installation](https://wiki.archlinux.org/title/Installation_guide#Boot_the_live_environment) Proccess
+* Set Console Keymap ( US by default ) and select fonts :
+	*  List of available Keymaps: 	`ls /usr/share/kbd/keymaps/**/*.map.gz` . Change using `loadkeys <name>` command.
+	*  List of available Fonts:	`ls /usr/share/kbd/consolefonts/`. Change using `setfont <name>` command.
+* Verify EFI boot mode:	`ls /sys/firmware/efi/efivars` . If the directory exists you are booted into UEFI disk firmware.
 * Ensure internet access : `ip a`
 	* For wired connections, internet should be configured automatically
 	* For wireless connections the use of [iwd](https://wiki.archlinux.org/title/Iwd#iwctl) utility is advised `iwdctl` :
@@ -56,11 +60,6 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 		* Initiate a scan for networks : `station <device name> scan`
 		* Display available networks : `station <device name> get-networks`
 		* Connect to chosen network: `station <device name> connect SSID`
-* Set Console Keymap ( US by default ) and select fonts :
-	*  List of available Keymaps: 	`ls /usr/share/kbd/keymaps/**/*.map.gz` . Change using `loadkeys <name>` command.
-	*  List of available Fonts:	`ls /usr/share/kbd/consolefonts/`. Change using `setfont <name>` command.
-* Verify EFI boot mode:	`ls /sys/firmware/efi/efivars` . If the directory exists you are booted into UEFI disk firmware.
-* Check for Internet Access: `ip a` . Use [iwd](https://wiki.archlinux.org/title/Iwd#iwctl) for Wifi connection.
 * Update the system clock: `timedatectl set-ntp true`
 * ##### Configuring **Partitions** and **Filesystems** :
 	* `lsblk -f` or `fdisk -l` -> List drives  
