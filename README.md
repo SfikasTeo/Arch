@@ -67,7 +67,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 	* The two most open sourced and advocated filesystems, tuned for desktop use, are [**Ext4**](https://wiki.archlinux.org/title/Ext4) and [**Btrfs**](https://wiki.archlinux.org/title/Btrfs)  
 	While the the first offers a reliable and accepably fast filesystem, the second provides a series of quality of life improvements, at the cost of some speed,
   	* [Partition Disk](https://wiki.archlinux.org/title/Installation_guide#Partition_the_disks) ( `/dev/sda` ):    
-          Any supported partition utility could be used. We will default to GNU **parted** -> `parted`  
+          Any supported partition utility could be used. We will default to GNU **parted** -> `parted /dev/sda`  
 		* Create a **gpt** partition table -> `mklabel gpt`
 		* Create the partitions :  
 		```
