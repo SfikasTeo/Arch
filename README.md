@@ -51,7 +51,11 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 ## [Installation](https://wiki.archlinux.org/title/Installation_guide#Boot_the_live_environment) Proccess
 * Ensure internet access : `ip a`
 	* For wired connections, internet should be configured automatically
-	* Use the [iwd](https://wiki.archlinux.org/title/Iwd#iwctl) utility.
+	* For wireless connections the use of [iwd](https://wiki.archlinux.org/title/Iwd#iwctl) utility is advised `iwdctl` :
+		* List available devices : `device list` 
+		* Initiate a scan for networks : `station <device name> scan`
+		* Display available networks : `station <device name> get-networks`
+		* Connect to chosen network: `station <device name> connect SSID`
 * Set Console Keymap ( US by default ) and select fonts :
 	*  List of available Keymaps: 	`ls /usr/share/kbd/keymaps/**/*.map.gz` . Change using `loadkeys <name>` command.
 	*  List of available Fonts:	`ls /usr/share/kbd/consolefonts/`. Change using `setfont <name>` command.
