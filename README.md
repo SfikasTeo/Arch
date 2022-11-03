@@ -49,7 +49,9 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 * [BootLoaders Comparisson](https://wiki.archlinux.org/title/Arch_boot_process#Boot_loader)
 
 ## [Installation](https://wiki.archlinux.org/title/Installation_guide#Boot_the_live_environment) Proccess
-
+* Ensure internet access : `ip a`
+	* For wired connections, internet should be configured automatically
+	* Use the [iwd](https://wiki.archlinux.org/title/Iwd#iwctl) utility.
 * Set Console Keymap ( US by default ) and select fonts :
 	*  List of available Keymaps: 	`ls /usr/share/kbd/keymaps/**/*.map.gz` . Change using `loadkeys <name>` command.
 	*  List of available Fonts:	`ls /usr/share/kbd/consolefonts/`. Change using `setfont <name>` command.
