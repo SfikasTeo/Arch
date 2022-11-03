@@ -114,7 +114,7 @@ Lastly Arch follows Linux Foundation's Filesystem Hierarchy Standard ([FHS](http
 	tune2fs -O fast_commit /dev/sda3
 	
 	# Disabling Journal may lead to data loss
-	# in sudden shutdowns, It is not advised.
+	# It is not advised but will enhance performance
 	tune2fs -O "^has_journal" /dev/sda3
 	```
 	* Mount the Filesystems :
