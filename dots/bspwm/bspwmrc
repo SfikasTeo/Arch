@@ -39,6 +39,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &		# Start shortcuts
 pkill picom 					# Kill picom
 picom & #--experimental-backends &		# Restart picom
 
+flameshot &
 xsetroot -cursor_name pirate &			# Set Xcursor
 feh --bg-fill ~/Pictures/wallpaper.jpg &	# Set wallpaper
 ~/.config/polybar/launch.sh &			# Start polybar
